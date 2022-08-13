@@ -7,21 +7,21 @@ export function fetchPosts() {
       user: {
         username: faker.internet.userName(),
         name: faker.name.fullName(),
-        profile_picture: faker.internet.avatar(),
+        avatar: faker.internet.avatar(),
       },
-      posted_on: faker.date.past(),
+      postedOn: faker.date.past(),
       content: faker.lorem.paragraphs(),
       likes: faker.datatype.number(100),
       liked: faker.datatype.boolean(),
-      comments: [...Array(Math.floor(Math.random() * 10))].map((_) => {
+      comments: [...Array(Math.floor(Math.random() * 10))].map((__) => {
         return {
           id: faker.datatype.uuid(),
           content: faker.lorem.lines(),
-          created_at: faker.date.past(),
+          createdAt: faker.date.past(),
           user: {
             username: faker.internet.userName(),
             name: faker.name.fullName(),
-            profile_picture: faker.internet.avatar(),
+            avatar: faker.internet.avatar(),
           },
         };
       }),

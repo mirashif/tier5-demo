@@ -1,0 +1,72 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:prettier/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "react-hooks", "@typescript-eslint"],
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "project": "tsconfig.json"
+      }
+    },
+    "react": {
+      // React version. "detect" automatically picks the version you have installed.
+      // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
+      // It will default to "latest" and warn if missing, and to "detect" in the future
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "@typescript-eslint/indent": 0,
+    "@typescript-eslint/no-shadow": ["error"],
+    "@typescript-eslint/no-unused-vars": "off",
+    "camelcase": 2,
+    "comma-dangle": 0,
+    "curly": "error",
+    "import/default": 0,
+    "import/named": 0,
+    "import/namespace": 0,
+    "import/no-anonymous-default-export": 2,
+    "import/no-cycle": [2, { "ignoreExternal": true }],
+    "import/no-default-export": 2,
+    "import/no-deprecated": 0,
+    "import/no-duplicates": 2,
+    "import/no-named-as-default-member": 0,
+    "import/no-named-as-default": 0,
+    "import/no-unused-modules": 0,
+    "import/no-useless-path-segments": 2,
+    "import/order": ["error", { "newlines-between": "always" }],
+    "import/prefer-default-export": 0,
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "no-nested-ternary": 2,
+    "no-shadow": "off",
+    "prefer-destructuring": 2,
+    "quotes": ["error", "double"],
+    "react-hooks/exhaustive-deps": [
+      "error",
+      { "additionalHooks": "(useMemoOne)" }
+    ],
+    "react-hooks/rules-of-hooks": 2,
+    "react/react-in-jsx-scope": "off",
+    "semi": ["error", "always"]
+  }
+}

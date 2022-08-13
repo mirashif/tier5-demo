@@ -4,7 +4,7 @@ export function fetchCurrentUser() {
   return {
     username: faker.internet.userName(),
     name: faker.name.fullName(),
-    profile_picture: faker.internet.avatar(),
+    avatar: faker.internet.avatar(),
   };
 }
 

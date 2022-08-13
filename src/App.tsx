@@ -4,13 +4,10 @@ import {
   Button,
   ButtonGroup,
   Center,
-  Circle,
   Container,
   HStack,
-  Icon,
   Input,
   Spinner,
-  Square,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -18,21 +15,22 @@ import { FiShare, FiThumbsUp } from "react-icons/fi";
 import { BiComment } from "react-icons/bi";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
+
 import { CurrentUser, fetchCurrentUser, fetchPosts, Posts } from "~/services";
 import { Header } from "~/components";
 
-function App() {
+export function App() {
   const [currentUser, setCurrentUser] = useState<CurrentUser>();
   const [posts, setPosts] = useState<Posts>();
 
   useEffect(() => {
-    const user = fetchCurrentUser();
-    setCurrentUser(user);
+    const result = fetchCurrentUser();
+    setCurrentUser(result);
   }, []);
 
   useEffect(() => {
-    const posts = fetchPosts();
-    setPosts(posts);
+    const result = fetchPosts();
+    setPosts(result);
   }, []);
 
   if (!posts || !currentUser) {
@@ -60,13 +58,13 @@ function App() {
           >
             {/* post head */}
             <HStack spacing={2} pt={3} mb={3}>
-              <Avatar src={post.user.profile_picture} size="md" />
+              <Avatar src={post.user.avatar} size="md" />
               <Box>
                 <Text fontSize="md" fontWeight={"bold"}>
                   {post.user.name}
                 </Text>
                 <Text fontSize="sm">
-                  {dayjs(post.posted_on).format("MMM D, YYYY")}
+                  {dayjs(post.postedOn).format("MMM D, YYYY")}
                 </Text>
               </Box>
             </HStack>
@@ -104,7 +102,7 @@ function App() {
             {/* comment section */}
             <VStack align={"stretch"} spacing={3} my={3}>
               <HStack align={"center"}>
-                <Avatar src={currentUser.profile_picture} size="sm" />
+                <Avatar src={currentUser.avatar} size="sm" />
                 <Input
                   variant="filled"
                   placeholder="Write a public comment..."
@@ -115,7 +113,7 @@ function App() {
               <VStack align={"start"} spacing={3}>
                 {post.comments.map((comment) => (
                   <HStack key={comment.id} align={"start"}>
-                    <Avatar src={comment.user.profile_picture} size="sm" />
+                    <Avatar src={comment.user.avatar} size="sm" />
                     <Box
                       bgColor={"gray.100"}
                       px={3}
@@ -137,5 +135,3 @@ function App() {
     </>
   );
 }
-
-export default App;

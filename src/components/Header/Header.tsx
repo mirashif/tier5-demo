@@ -1,12 +1,10 @@
 import {
   Avatar,
   Box,
-  Button,
   ButtonGroup,
   Circle,
   HStack,
   IconButton,
-  Image,
   Input,
   InputGroup,
   InputLeftElement,
@@ -19,10 +17,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { CurrentUser, fetchCurrentUser } from "~/services";
 import { BsFacebook, BsSearch } from "react-icons/bs";
 import { FaFacebookMessenger } from "react-icons/fa";
 import { IoLogOut, IoNotifications } from "react-icons/io5";
+
+import { CurrentUser, fetchCurrentUser } from "~/services";
 
 export function Header() {
   const [currentUser, setCurrentUser] = useState<CurrentUser>();
@@ -50,10 +49,9 @@ export function Header() {
         <HStack spacing={2}>
           <BsFacebook size="40px" />
           <InputGroup w="2xs">
-            <InputLeftElement
-              pointerEvents="none"
-              children={<BsSearch color="gray.300" />}
-            />
+            <InputLeftElement pointerEvents="none">
+              <BsSearch color="gray.300" />
+            </InputLeftElement>
             <Input
               h="40px"
               variant="filled"
@@ -115,7 +113,7 @@ export function Header() {
                 <Avatar
                   size="full"
                   name={currentUser?.name}
-                  src={currentUser?.profile_picture}
+                  src={currentUser?.avatar}
                 />
               </Box>
             </MenuButton>
@@ -126,7 +124,7 @@ export function Header() {
                     <Avatar
                       size="full"
                       name={currentUser?.name}
-                      src={currentUser?.profile_picture}
+                      src={currentUser?.avatar}
                     />
                   </Box>
                   <Text fontWeight="bold" color="black">
