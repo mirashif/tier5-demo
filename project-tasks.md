@@ -1,12 +1,14 @@
 # Instruction
+
 - Please submit your code by sharing your Github Public Repo link
-- All git commits should have proper commit message. 
-- Please use readme.md file for screenshot of your running code where your system date-time need to be  captured.
+- All git commits should have proper commit message.
+- Please use readme.md file for screenshot of your running code where your system date-time need to be captured.
 
 # Task 1
+
 Using React create a dummy Facebook home page with the following functionalities:  
 [ ] Listing of posts  
-[ ] Actions on each post (like comment, share)  
+[ ] Actions on each post (like, comment, share)  
 [ ] Each post should have comments  
 [ ] Online users list  
 [ ] Current user name and profile icon  
@@ -15,6 +17,7 @@ Using React create a dummy Facebook home page with the following functionaliti
 [ ] Responsive design
 
 You can follow the below JSON structure for the API response and modify it accordingly.
+
 ```json
 {
   "user": {
@@ -50,6 +53,7 @@ You can follow the below JSON structure for the API response and modify it accor
 ```
 
 # Task 2
+
 Using React create a dummy Instagram home page.
 Functionalities required:
 [ ] Listing of posts
@@ -163,9 +167,7 @@ You can use the below JSON as a reference for the API response, add more fields 
     },
     {
       "attribution": null,
-      "tags": [
-        "thehuntingpartytour"
-      ],
+      "tags": ["thehuntingpartytour"],
       "type": "image",
       "location": null,
       "filter": "Normal",
@@ -211,11 +213,7 @@ You can use the below JSON as a reference for the API response, add more fields 
     },
     {
       "attribution": null,
-      "tags": [
-        "marmaris",
-        "turkey",
-        "dhotel"
-      ],
+      "tags": ["marmaris", "turkey", "dhotel"],
       "type": "image",
       "location": null,
       "filter": "Juno",
