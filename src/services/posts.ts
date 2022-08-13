@@ -31,4 +31,4 @@ export function fetchPosts() {
   return posts;
 }
 
-export type Post = ReturnType<typeof fetchPosts>;
+export type Posts = ReturnType<typeof fetchPosts>;
