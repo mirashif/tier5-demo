@@ -8,6 +8,7 @@ import {
   Container,
   HStack,
   Icon,
+  Input,
   Spinner,
   Square,
   Text,
@@ -46,15 +47,8 @@ function App() {
           mt={6}
           px={4}
         >
-          <Box
-            display={"flex"}
-            flexDirection={"row"}
-            gap={2}
-            alignItems={"center"}
-            justifyContent={"start"}
-            pt={3}
-            mb={3}
-          >
+          {/* post head */}
+          <HStack spacing={2} pt={3} mb={3}>
             <Avatar src={post.user.profile_picture} size="md" />
             <Box>
               <Text fontSize="md" fontWeight={"bold"}>
@@ -64,12 +58,13 @@ function App() {
                 {dayjs(post.posted_on).format("MMM D, YYYY")}
               </Text>
             </Box>
-          </Box>
+          </HStack>
 
           <Text fontSize={"md"} py={1}>
             {post.content}
           </Text>
 
+          {/* action buttons */}
           <VStack align={"stretch"} spacing={0}>
             <HStack py={2.5} justify={"space-between"}>
               <Text>{post.likes} Likes</Text>
@@ -93,6 +88,32 @@ function App() {
                 </Button>
               </ButtonGroup>
             </HStack>
+          </VStack>
+
+          {/* comment section */}
+          <VStack align={"stretch"} spacing={4} my={4}>
+            <HStack align={"center"}>
+              <Avatar src={post.user.profile_picture} size="sm" />
+              <Input
+                variant="filled"
+                placeholder="Write a public comment..."
+                borderRadius={"full"}
+              />
+            </HStack>
+
+            <VStack align={"start"} spacing={3}>
+              {post.comments.map((comment) => (
+                <HStack key={comment.id} align={"start"}>
+                  <Avatar src={comment.user.profile_picture} size="sm" />
+                  <Box bgColor={"gray.100"} px={3} py={2} borderRadius={"2xl"}>
+                    <Text fontSize={"sm"} fontWeight={"bold"}>
+                      {comment.user.name}
+                    </Text>
+                    <Text>{comment.content}</Text>
+                  </Box>
+                </HStack>
+              ))}
+            </VStack>
           </VStack>
         </Box>
       ))}

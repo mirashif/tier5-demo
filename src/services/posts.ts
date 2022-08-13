@@ -15,6 +15,7 @@ export function fetchPosts() {
       liked: faker.datatype.boolean(),
       comments: [...Array(Math.floor(Math.random() * 10))].map((_) => {
         return {
+          id: faker.datatype.uuid(),
           content: faker.lorem.lines(),
           created_at: faker.date.past(),
           user: {
