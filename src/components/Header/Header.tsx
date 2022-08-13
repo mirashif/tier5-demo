@@ -12,6 +12,8 @@ import {
   InputLeftElement,
   Menu,
   MenuButton,
+  MenuDivider,
+  MenuGroup,
   MenuItem,
   MenuList,
   Text,
@@ -62,6 +64,7 @@ export function Header() {
         </HStack>
 
         <ButtonGroup>
+          {/* messenger */}
           <Menu>
             <MenuButton as={IconButton} p="0" borderRadius="full">
               <IconButton
@@ -82,6 +85,8 @@ export function Header() {
               </Text>
             </MenuList>
           </Menu>
+
+          {/* notifications */}
           <Menu>
             <MenuButton as={IconButton} p="0" borderRadius="full">
               <IconButton
@@ -102,6 +107,8 @@ export function Header() {
               </Text>
             </MenuList>
           </Menu>
+
+          {/* account */}
           <Menu>
             <MenuButton as={IconButton} p="0" borderRadius="full">
               <Box boxSize="40px">
@@ -113,18 +120,21 @@ export function Header() {
               </Box>
             </MenuButton>
             <MenuList>
-              <MenuItem gap={2}>
-                <Box boxSize="36px">
-                  <Avatar
-                    size="full"
-                    name={currentUser?.name}
-                    src={currentUser?.profile_picture}
-                  />
-                </Box>
-                <Text fontWeight="bold" color="black">
-                  {currentUser?.name}
-                </Text>
-              </MenuItem>
+              <MenuGroup title="Profile">
+                <MenuItem gap={2}>
+                  <Box boxSize="36px">
+                    <Avatar
+                      size="full"
+                      name={currentUser?.name}
+                      src={currentUser?.profile_picture}
+                    />
+                  </Box>
+                  <Text fontWeight="bold" color="black">
+                    {currentUser?.name}
+                  </Text>
+                </MenuItem>
+              </MenuGroup>
+              <MenuDivider />
               <MenuItem gap={2}>
                 <Circle size="36px" bg="gray.200" color="black">
                   <IoLogOut size="20px" />
