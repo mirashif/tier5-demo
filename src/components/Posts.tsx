@@ -101,7 +101,7 @@ export const Posts = () => {
                 </Button>
                 <Button
                   as="label"
-                  htmlFor="comment"
+                  htmlFor={`comment-${post.id}`}
                   cursor="pointer"
                   flex={1}
                   leftIcon={<BiComment />}
@@ -132,7 +132,7 @@ export const Posts = () => {
             <HStack align="center">
               <Avatar src={currentUser.avatar} size="sm" />
               <Input
-                id="comment"
+                id={`comment-${post.id}`}
                 onKeyDown={(e) => {
                   if (e.key == "Enter") {
                     addNewComment(post.id, e.currentTarget.value);
