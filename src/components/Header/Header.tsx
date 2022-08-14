@@ -16,20 +16,14 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { BsFacebook, BsSearch } from "react-icons/bs";
 import { FaFacebookMessenger } from "react-icons/fa";
 import { IoLogOut, IoNotifications } from "react-icons/io5";
 
-import { CurrentUser, fetchCurrentUser } from "~/services";
+import { useFacebookStore } from "~/store";
 
 export function Header() {
-  const [currentUser, setCurrentUser] = useState<CurrentUser>();
-
-  useEffect(() => {
-    const user = fetchCurrentUser();
-    setCurrentUser(user);
-  }, []);
+  const currentUser = useFacebookStore((state) => state.currentUser);
 
   return (
     <Box

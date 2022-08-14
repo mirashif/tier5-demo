@@ -14,24 +14,23 @@ import {
 import { FiShare, FiThumbsUp } from "react-icons/fi";
 import { BiComment } from "react-icons/bi";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import { CurrentUser, fetchCurrentUser, fetchPosts, Posts } from "~/services";
+import { fetchCurrentUser, fetchFacebookPosts } from "./services";
+
+import { useFacebookStore } from "~/store";
 import { Header } from "~/components";
 
 export function App() {
-  const [currentUser, setCurrentUser] = useState<CurrentUser>();
-  const [posts, setPosts] = useState<Posts>();
+  const populate = useFacebookStore((state) => state.populate);
+  const posts = useFacebookStore((state) => state.posts);
+  const currentUser = useFacebookStore((state) => state.currentUser);
 
   useEffect(() => {
-    const result = fetchCurrentUser();
-    setCurrentUser(result);
-  }, []);
-
-  useEffect(() => {
-    const result = fetchPosts();
-    setPosts(result);
-  }, []);
+    const user = fetchCurrentUser();
+    const facebookPosts = fetchFacebookPosts();
+    populate(user, facebookPosts);
+  }, [populate]);
 
   if (!posts || !currentUser) {
     return (
@@ -45,7 +44,7 @@ export function App() {
     <>
       <Header />
 
-      <Container as={"main"}>
+      <Container as="main">
         {posts.map((post) => (
           <Box
             key={post.id}
@@ -60,7 +59,7 @@ export function App() {
             <HStack spacing={2} pt={3} mb={3}>
               <Avatar src={post.user.avatar} size="md" />
               <Box>
-                <Text fontSize="md" fontWeight={"bold"}>
+                <Text fontSize="md" fontWeight="bold">
                   {post.user.name}
                 </Text>
                 <Text fontSize="sm">
@@ -69,28 +68,28 @@ export function App() {
               </Box>
             </HStack>
 
-            <Text fontSize={"md"} py={1}>
+            <Text fontSize="md" py={1}>
               {post.content}
             </Text>
 
             {/* action buttons */}
-            <VStack align={"stretch"} spacing={0}>
-              <HStack py={2.5} justify={"space-between"}>
+            <VStack align="stretch" spacing={0}>
+              <HStack py={2.5} justify="space-between">
                 <Text>{post.likes} Likes</Text>
                 <Text>{post.comments.length} Comments</Text>
               </HStack>
-              <HStack py={1} borderY={"1px"} borderColor={"gray.300"}>
+              <HStack py={1} borderY="1px" borderColor="gray.300">
                 <ButtonGroup
                   flex={1}
                   spacing={1}
-                  variant={"ghost"}
+                  variant="ghost"
                   colorScheme="blackAlpha"
                 >
                   <Button flex={1} leftIcon={<FiThumbsUp />}>
-                    Likes
+                    Like
                   </Button>
                   <Button flex={1} leftIcon={<BiComment />}>
-                    Comments
+                    Comment
                   </Button>
                   <Button flex={1} leftIcon={<FiShare />}>
                     Share
@@ -100,27 +99,22 @@ export function App() {
             </VStack>
 
             {/* comment section */}
-            <VStack align={"stretch"} spacing={3} my={3}>
-              <HStack align={"center"}>
+            <VStack align="stretch" spacing={3} my={3}>
+              <HStack align="center">
                 <Avatar src={currentUser.avatar} size="sm" />
                 <Input
                   variant="filled"
                   placeholder="Write a public comment..."
-                  borderRadius={"full"}
+                  borderRadius="full"
                 />
               </HStack>
 
-              <VStack align={"start"} spacing={3}>
+              <VStack align="start" spacing={3}>
                 {post.comments.map((comment) => (
-                  <HStack key={comment.id} align={"start"}>
+                  <HStack key={comment.id} align="start">
                     <Avatar src={comment.user.avatar} size="sm" />
-                    <Box
-                      bgColor={"gray.100"}
-                      px={3}
-                      py={2}
-                      borderRadius={"2xl"}
-                    >
-                      <Text fontSize={"sm"} fontWeight={"bold"}>
+                    <Box bgColor="gray.100" px={3} py={2} borderRadius="2xl">
+                      <Text fontSize="sm" fontWeight="bold">
                         {comment.user.name}
                       </Text>
                       <Text>{comment.content}</Text>
@@ -131,6 +125,10 @@ export function App() {
             </VStack>
           </Box>
         ))}
+
+        <Text fontSize="sm" textAlign="center" my="6">
+          End of posts.
+        </Text>
       </Container>
     </>
   );
