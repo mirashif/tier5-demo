@@ -13,8 +13,12 @@ import {
   MenuDivider,
   MenuGroup,
   MenuItem,
+  MenuItemOption,
   MenuList,
+  MenuOptionGroup,
   Text,
+  ThemeConfig,
+  useColorMode,
 } from "@chakra-ui/react";
 import { BsFacebook, BsSearch } from "react-icons/bs";
 import { FaFacebookMessenger } from "react-icons/fa";
@@ -44,7 +48,7 @@ export function Header() {
           <BsFacebook size="40px" />
           <InputGroup w="2xs">
             <InputLeftElement pointerEvents="none">
-              <BsSearch color="gray.300" />
+              <BsSearch />
             </InputLeftElement>
             <Input
               h="40px"
@@ -62,17 +66,11 @@ export function Header() {
               <IconButton
                 borderRadius="full"
                 aria-label="Messenger"
-                icon={<FaFacebookMessenger color="black" size="20px" />}
+                icon={<FaFacebookMessenger size="20px" />}
               />
             </MenuButton>
             <MenuList>
-              <Text
-                fontSize="sm"
-                textAlign="center"
-                color="black"
-                px="4"
-                py="3"
-              >
+              <Text fontSize="sm" textAlign="center" px="4" py="3">
                 There are no message
               </Text>
             </MenuList>
@@ -84,17 +82,11 @@ export function Header() {
               <IconButton
                 borderRadius="full"
                 aria-label="Notifications"
-                icon={<IoNotifications color="black" size="20px" />}
+                icon={<IoNotifications size="20px" />}
               />
             </MenuButton>
             <MenuList>
-              <Text
-                fontSize="sm"
-                textAlign="center"
-                color="black"
-                px="4"
-                py="3"
-              >
+              <Text fontSize="sm" textAlign="center" px="4" py="3">
                 There are no notifications
               </Text>
             </MenuList>
@@ -111,6 +103,7 @@ export function Header() {
                 />
               </Box>
             </MenuButton>
+
             <MenuList>
               <MenuGroup title="Profile">
                 <MenuItem gap={2}>
@@ -121,19 +114,17 @@ export function Header() {
                       src={currentUser?.avatar}
                     />
                   </Box>
-                  <Text fontWeight="bold" color="black">
-                    {currentUser?.name}
-                  </Text>
+                  <Text fontWeight="bold">{currentUser?.name}</Text>
                 </MenuItem>
               </MenuGroup>
+
               <MenuDivider />
+              {/* logout button */}
               <MenuItem gap={2}>
-                <Circle size="36px" bg="gray.200" color="black">
+                <Circle size="36px" bg="blackAlpha.200">
                   <IoLogOut size="20px" />
                 </Circle>
-                <Text fontWeight="bold" color="black">
-                  Logout
-                </Text>
+                <Text fontWeight="bold">Logout</Text>
               </MenuItem>
             </MenuList>
           </Menu>

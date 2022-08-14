@@ -45,6 +45,31 @@ export function App() {
       <Header />
 
       <Container as="main">
+        <Box
+          border="1px"
+          borderColor="gray.100"
+          rounded="lg"
+          shadow="base"
+          mt={6}
+          p={4}
+        >
+          <VStack align="stretch" spacing={4}>
+            <HStack align="center" h="40px">
+              <Box boxSize="40px" flexShrink={0}>
+                <Avatar src={currentUser.avatar} size="full" />
+              </Box>
+              <Input
+                variant="filled"
+                placeholder={`What's on your mind, ${
+                  currentUser.name.split(" ")[0]
+                }?`}
+                borderRadius="full"
+              />
+            </HStack>
+            <Button>Post</Button>
+          </VStack>
+        </Box>
+
         {posts.map((post) => (
           <Box
             key={post.id}
