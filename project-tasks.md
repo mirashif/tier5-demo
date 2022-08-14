@@ -9,9 +9,9 @@
 Using React create a dummy Facebook home page with the following functionalities:  
 - [x] Listing of posts  
 - [ ] Actions on each post  
-  - [ ] like,  
+  - [x] like,  
   - [x] comment,  
-  - [ ] share  
+  - [x] share  
   - [x] (Extra) add new post
 - [x] Each post should have comments  
 - [ ] Online users list  
@@ -21,7 +21,7 @@ Using React create a dummy Facebook home page with the following functionaliti
   - [x] profile, 
   - [x] messages, 
   - [x] notifications, etc...  
-- [ ] Implement a dummy API call that will return the list of posts that can be used to render in the UI.  
+- [x] Implement a dummy API call that will return the list of posts that can be used to render in the UI.  
 - [ ] Responsive design
 
 You can follow the below JSON structure for the API response and modify it accordingly.

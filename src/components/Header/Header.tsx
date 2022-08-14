@@ -13,12 +13,8 @@ import {
   MenuDivider,
   MenuGroup,
   MenuItem,
-  MenuItemOption,
   MenuList,
-  MenuOptionGroup,
   Text,
-  ThemeConfig,
-  useColorMode,
 } from "@chakra-ui/react";
 import { BsFacebook, BsSearch } from "react-icons/bs";
 import { FaFacebookMessenger } from "react-icons/fa";

@@ -9,19 +9,21 @@ import {
   Input,
   Spinner,
   Text,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { FiShare, FiThumbsUp } from "react-icons/fi";
 import { BiComment } from "react-icons/bi";
-import dayjs from "dayjs";
 import { useEffect, useRef } from "react";
+import { faker } from "@faker-js/faker";
+import dayjs from "dayjs";
 
-import { fetchCurrentUser, fetchFacebookPosts } from "./services";
-
+import { fetchCurrentUser, fetchFacebookPosts } from "~/services";
 import { useFacebookStore } from "~/store";
 import { Header } from "~/components";
 
 export function App() {
+  const toast = useToast();
   const currentUser = useFacebookStore((state) => state.currentUser);
   const posts = useFacebookStore((state) => state.posts);
   const populate = useFacebookStore((state) => state.populate);
@@ -29,7 +31,7 @@ export function App() {
   const toggleLike = useFacebookStore((state) => state.toggleLike);
   const addComment = useFacebookStore((state) => state.addComment);
 
-  const newPostRef = useRef<HTMLInputElement>(null);
+  const postInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const user = fetchCurrentUser();
@@ -38,10 +40,10 @@ export function App() {
   }, [populate]);
 
   const addNewPost = () => {
-    if (!newPostRef.current || !newPostRef.current.value) {
+    if (!postInputRef.current || !postInputRef.current.value) {
       return;
     }
-    const newPostText = newPostRef.current.value;
+    const newPostText = postInputRef.current.value;
     addPost(newPostText);
   };
 
@@ -79,7 +81,7 @@ export function App() {
                 <Avatar src={currentUser.avatar} size="full" />
               </Box>
               <Input
-                ref={newPostRef}
+                ref={postInputRef}
                 variant="filled"
                 placeholder={`What's on your mind, ${
                   currentUser.name.split(" ")[0]
@@ -87,7 +89,9 @@ export function App() {
                 borderRadius="full"
               />
             </HStack>
-            <Button onClick={addNewPost}>Post</Button>
+            <Button colorScheme="blue" onClick={addNewPost}>
+              Post
+            </Button>
           </VStack>
         </Box>
 
@@ -134,15 +138,27 @@ export function App() {
                   <Button
                     onClick={() => toggleLike(post.id)}
                     flex={1}
-                    color={post.liked ? "blue.400" : "initial"}
                     leftIcon={<FiThumbsUp />}
+                    color={post.liked ? "blue.400" : undefined}
                   >
                     {post.liked ? "Liked" : "Like"}
                   </Button>
                   <Button flex={1} leftIcon={<BiComment />}>
                     Comment
                   </Button>
-                  <Button flex={1} leftIcon={<FiShare />}>
+                  <Button
+                    onClick={() => {
+                      const dummyUrl = faker.internet.avatar();
+                      navigator.clipboard.writeText(dummyUrl);
+                      toast({
+                        title: "Post URL copied to clipboard",
+                        status: "info",
+                        duration: 2000,
+                      });
+                    }}
+                    flex={1}
+                    leftIcon={<FiShare />}
+                  >
                     Share
                   </Button>
                 </ButtonGroup>
