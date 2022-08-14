@@ -10,8 +10,9 @@ Using React create a dummy Facebook home page with the following functionaliti
 - [x] Listing of posts  
 - [ ] Actions on each post  
   - [ ] like,  
-  - [ ] comment,  
+  - [x] comment,  
   - [ ] share  
+  - [x] (Extra) add new post
 - [x] Each post should have comments  
 - [ ] Online users list  
 - [x] Current user name and profile icon  

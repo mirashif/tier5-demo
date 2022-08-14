@@ -11,13 +11,13 @@ export function fetchFacebookPosts(limit?: number) {
         avatar: faker.internet.avatar(),
       },
       postedOn: faker.date.past(),
-      content: faker.lorem.paragraphs(),
+      text: faker.lorem.paragraphs(),
       likes: faker.datatype.number(100),
       liked: faker.datatype.boolean(),
       comments: [...Array(Math.floor(Math.random() * 10))].map((__) => {
         return {
           id: faker.datatype.uuid(),
-          content: faker.lorem.lines(),
+          text: faker.lorem.lines(),
           createdAt: faker.date.past(),
           user: {
             id: faker.datatype.uuid(),
@@ -42,7 +42,7 @@ export interface User {
 
 export interface Comment {
   id: string;
-  content: string;
+  text: string;
   createdAt: Date;
   user: User;
 }
@@ -51,8 +51,8 @@ export interface Post {
   id: string;
   user: User;
   postedOn: Date;
-  content: string;
+  text: string;
   likes: number;
   liked: boolean;
-  comments: Comment[];
+  comments: Comment[] | [];
 }

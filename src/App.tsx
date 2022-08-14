@@ -14,7 +14,7 @@ import {
 import { FiShare, FiThumbsUp } from "react-icons/fi";
 import { BiComment } from "react-icons/bi";
 import dayjs from "dayjs";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { fetchCurrentUser, fetchFacebookPosts } from "./services";
 
@@ -22,15 +22,35 @@ import { useFacebookStore } from "~/store";
 import { Header } from "~/components";
 
 export function App() {
-  const populate = useFacebookStore((state) => state.populate);
-  const posts = useFacebookStore((state) => state.posts);
   const currentUser = useFacebookStore((state) => state.currentUser);
+  const posts = useFacebookStore((state) => state.posts);
+  const populate = useFacebookStore((state) => state.populate);
+  const addPost = useFacebookStore((state) => state.addPost);
+  const toggleLike = useFacebookStore((state) => state.toggleLike);
+  const addComment = useFacebookStore((state) => state.addComment);
+
+  const newPostRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const user = fetchCurrentUser();
     const facebookPosts = fetchFacebookPosts();
     populate(user, facebookPosts);
   }, [populate]);
+
+  const addNewPost = () => {
+    if (!newPostRef.current || !newPostRef.current.value) {
+      return;
+    }
+    const newPostText = newPostRef.current.value;
+    addPost(newPostText);
+  };
+
+  const addNewComment = (postId: string, text: string) => {
+    if (!postId || !text.trim()) {
+      return;
+    }
+    addComment(postId, text);
+  };
 
   if (!posts || !currentUser) {
     return (
@@ -59,6 +79,7 @@ export function App() {
                 <Avatar src={currentUser.avatar} size="full" />
               </Box>
               <Input
+                ref={newPostRef}
                 variant="filled"
                 placeholder={`What's on your mind, ${
                   currentUser.name.split(" ")[0]
@@ -66,7 +87,7 @@ export function App() {
                 borderRadius="full"
               />
             </HStack>
-            <Button>Post</Button>
+            <Button onClick={addNewPost}>Post</Button>
           </VStack>
         </Box>
 
@@ -94,7 +115,7 @@ export function App() {
             </HStack>
 
             <Text fontSize="md" py={1}>
-              {post.content}
+              {post.text}
             </Text>
 
             {/* action buttons */}
@@ -110,8 +131,13 @@ export function App() {
                   variant="ghost"
                   colorScheme="blackAlpha"
                 >
-                  <Button flex={1} leftIcon={<FiThumbsUp />}>
-                    Like
+                  <Button
+                    onClick={() => toggleLike(post.id)}
+                    flex={1}
+                    color={post.liked ? "blue.400" : "initial"}
+                    leftIcon={<FiThumbsUp />}
+                  >
+                    {post.liked ? "Liked" : "Like"}
                   </Button>
                   <Button flex={1} leftIcon={<BiComment />}>
                     Comment
@@ -128,6 +154,12 @@ export function App() {
               <HStack align="center">
                 <Avatar src={currentUser.avatar} size="sm" />
                 <Input
+                  onKeyDown={(e) => {
+                    if (e.key == "Enter") {
+                      addNewComment(post.id, e.currentTarget.value);
+                      e.currentTarget.value = "";
+                    }
+                  }}
                   variant="filled"
                   placeholder="Write a public comment..."
                   borderRadius="full"
@@ -142,7 +174,7 @@ export function App() {
                       <Text fontSize="sm" fontWeight="bold">
                         {comment.user.name}
                       </Text>
-                      <Text>{comment.content}</Text>
+                      <Text>{comment.text}</Text>
                     </Box>
                   </HStack>
                 ))}
