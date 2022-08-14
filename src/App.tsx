@@ -41,7 +41,7 @@ export function App() {
         align="start"
         justify="center"
       >
-        <Container as="main">
+        <Container as="main" w="full" maxW="full" mx="0">
           <AddPost />
           <Posts />
         </Container>

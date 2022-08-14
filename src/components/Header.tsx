@@ -38,15 +38,15 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
       as="header"
       h="56px"
       bg="white"
+      shadow="base"
       display="flex"
       alignItems="center"
       justifyContent="center"
-      shadow="base"
       position="sticky"
       zIndex="sticky"
       top="0"
     >
-      <HStack px={4} spacing={2} justify="space-between" w="full" maxW="5xl">
+      <HStack spacing={2} px={4} justify="space-between" w="full" maxW="5xl">
         <HStack spacing={2}>
           {/* brand logo */}
           <IconButton
