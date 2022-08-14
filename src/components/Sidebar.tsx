@@ -43,7 +43,7 @@ export const Sidebar = ({ variant, isOpen, onClose }: Props) => {
 const SidebarContent = () => {
   const onlineUsers = useFacebookStore((state) => state.onlineUsers);
   return (
-    <Container as="aside" maxW="sm">
+    <Container as="aside" maxW="sm" position="sticky" top="56px">
       <List my="6">
         <Text fontSize="lg" fontWeight="medium" color="blackAlpha.700" mb="3">
           Online Users

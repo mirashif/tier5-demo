@@ -22,7 +22,7 @@ Using React create a dummy Facebook home page with the following functionaliti
   - [x] messages, 
   - [x] notifications, etc...  
 - [x] Implement a dummy API call that will return the list of posts that can be used to render in the UI.  
-- [ ] Responsive design
+- [x] Responsive design
 
 You can follow the below JSON structure for the API response and modify it accordingly.
 
