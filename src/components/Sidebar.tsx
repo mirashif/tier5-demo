@@ -1,8 +1,12 @@
 import {
   Avatar,
   AvatarBadge,
-  Box,
   Container,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerOverlay,
   HStack,
   List,
   ListItem,
@@ -11,9 +15,33 @@ import {
 
 import { useFacebookStore } from "~/store";
 
-export const Sidebar = () => {
-  const onlineUsers = useFacebookStore((state) => state.onlineUsers);
+export type SidebarVariant = "sidebar" | "drawer";
 
+interface Props {
+  onClose: () => void;
+  isOpen: boolean;
+  variant: SidebarVariant;
+}
+
+export const Sidebar = ({ variant, isOpen, onClose }: Props) => {
+  return variant === "sidebar" ? (
+    <SidebarContent />
+  ) : (
+    <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+      <DrawerOverlay>
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerBody>
+            <SidebarContent />
+          </DrawerBody>
+        </DrawerContent>
+      </DrawerOverlay>
+    </Drawer>
+  );
+};
+
+const SidebarContent = () => {
+  const onlineUsers = useFacebookStore((state) => state.onlineUsers);
   return (
     <Container as="aside" maxW="sm">
       <List my="6">

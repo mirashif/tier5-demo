@@ -1,13 +1,38 @@
-import { Container, HStack } from "@chakra-ui/react";
+import { Container, HStack, useBreakpointValue } from "@chakra-ui/react";
+import { useState } from "react";
 
-import { Sidebar } from "./components/Sidebar";
+import {
+  AddPost,
+  Header,
+  Posts,
+  ShowMenu,
+  Sidebar,
+  SidebarVariant,
+} from "~/components";
 
-import { AddPost, Header, Posts } from "~/components";
+type Breakpoint = { sidebar: SidebarVariant; showMenu: ShowMenu };
+
+const base: Breakpoint = {
+  sidebar: "drawer",
+  showMenu: true,
+};
+const lg: Breakpoint = { sidebar: "sidebar", showMenu: false };
 
 export function App() {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const variants = useBreakpointValue<Breakpoint>({
+    base,
+    lg,
+  });
+
+  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+
   return (
     <>
-      <Header />
+      <Header
+        showMenuButton={variants?.showMenu as ShowMenu}
+        onShowSidebar={toggleSidebar}
+      />
       <HStack
         spacing={4}
         w="full"
@@ -20,7 +45,11 @@ export function App() {
           <AddPost />
           <Posts />
         </Container>
-        <Sidebar />
+        <Sidebar
+          variant={variants?.sidebar as SidebarVariant}
+          isOpen={isSidebarOpen}
+          onClose={toggleSidebar}
+        />
       </HStack>
     </>
   );
