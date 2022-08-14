@@ -13,26 +13,17 @@ import {
 } from "@chakra-ui/react";
 import { faker } from "@faker-js/faker";
 import dayjs from "dayjs";
-import { useEffect } from "react";
 import { BiComment } from "react-icons/bi";
 import { FiThumbsUp, FiShare } from "react-icons/fi";
 
-import { fetchCurrentUser, fetchFacebookPosts } from "~/services";
 import { useFacebookStore } from "~/store";
 
 export const Posts = () => {
   const toast = useToast();
+  const addComment = useFacebookStore((state) => state.addComment);
   const currentUser = useFacebookStore((state) => state.currentUser);
   const posts = useFacebookStore((state) => state.posts);
-  const populate = useFacebookStore((state) => state.populate);
   const toggleLike = useFacebookStore((state) => state.toggleLike);
-  const addComment = useFacebookStore((state) => state.addComment);
-
-  useEffect(() => {
-    const user = fetchCurrentUser();
-    const facebookPosts = fetchFacebookPosts();
-    populate(user, facebookPosts);
-  }, [populate]);
 
   const addNewComment = (postId: string, text: string) => {
     if (!postId || !text.trim()) {
@@ -63,9 +54,9 @@ export const Posts = () => {
         >
           {/* post head */}
           <HStack spacing={2} pt={3} mb={3}>
-            <Avatar src={post.user.avatar} size="md" />
+            <Avatar src={post.user.avatar} boxSize="40px" />
             <Box>
-              <Text fontSize="md" fontWeight="bold">
+              <Text fontSize="md" fontWeight="medium">
                 {post.user.name}
               </Text>
               <Text fontSize="sm">
@@ -130,7 +121,7 @@ export const Posts = () => {
           {/* add a comment */}
           <VStack align="stretch" spacing={3} my={3}>
             <HStack align="center">
-              <Avatar src={currentUser.avatar} size="sm" />
+              <Avatar src={currentUser.avatar} boxSize="40px" />
               <Input
                 id={`comment-${post.id}`}
                 onKeyDown={(e) => {
@@ -149,9 +140,9 @@ export const Posts = () => {
             <VStack align="start" spacing={3}>
               {post.comments.map((comment) => (
                 <HStack key={comment.id} align="start">
-                  <Avatar src={comment.user.avatar} size="sm" />
+                  <Avatar src={comment.user.avatar} boxSize="40px" />
                   <Box bgColor="gray.100" px={3} py={2} borderRadius="2xl">
-                    <Text fontSize="sm" fontWeight="bold">
+                    <Text fontSize="sm" fontWeight="medium">
                       {comment.user.name}
                     </Text>
                     <Text>{comment.text}</Text>

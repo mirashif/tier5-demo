@@ -37,7 +37,10 @@
   "rules": {
     "@typescript-eslint/indent": 0,
     "@typescript-eslint/no-shadow": ["error"],
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_" }
+    ],
     "camelcase": 2,
     "comma-dangle": 0,
     "curly": "error",

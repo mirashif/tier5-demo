@@ -3,7 +3,7 @@ import { useRef } from "react";
 
 import { useFacebookStore } from "~/store";
 
-export const AddNewPost = () => {
+export const AddPost = () => {
   const currentUser = useFacebookStore((state) => state.currentUser);
   const addPost = useFacebookStore((state) => state.addPost);
 
@@ -28,9 +28,7 @@ export const AddNewPost = () => {
     >
       <VStack align="stretch" spacing={4}>
         <HStack align="center" h="40px">
-          <Box boxSize="40px" flexShrink={0}>
-            <Avatar src={currentUser?.avatar} size="full" />
-          </Box>
+          <Avatar src={currentUser?.avatar} boxSize="40px" />
           <Input
             ref={postInputRef}
             variant="filled"

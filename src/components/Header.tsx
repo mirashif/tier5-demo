@@ -35,10 +35,10 @@ export function Header() {
       justifyContent="center"
       shadow="base"
       position="sticky"
-      top="0"
       zIndex="sticky"
+      top="0"
     >
-      <HStack spacing={2} justify="space-between" w="full" maxW="5xl">
+      <HStack px={4} spacing={2} justify="space-between" w="full" maxW="5xl">
         {/* logo and search */}
         <HStack spacing={2}>
           <BsFacebook size="40px" />
@@ -58,7 +58,7 @@ export function Header() {
         <ButtonGroup>
           {/* messenger */}
           <Menu>
-            <MenuButton as={IconButton} p="0" borderRadius="full">
+            <MenuButton>
               <IconButton
                 borderRadius="full"
                 aria-label="Messenger"
@@ -74,7 +74,7 @@ export function Header() {
 
           {/* notifications */}
           <Menu>
-            <MenuButton as={IconButton} p="0" borderRadius="full">
+            <MenuButton>
               <IconButton
                 borderRadius="full"
                 aria-label="Notifications"
@@ -90,27 +90,23 @@ export function Header() {
 
           {/* account */}
           <Menu>
-            <MenuButton as={IconButton} p="0" borderRadius="full">
-              <Box boxSize="40px">
-                <Avatar
-                  size="full"
-                  name={currentUser?.name}
-                  src={currentUser?.avatar}
-                />
-              </Box>
+            <MenuButton>
+              <Avatar
+                boxSize="40px"
+                name={currentUser?.name}
+                src={currentUser?.avatar}
+              />
             </MenuButton>
 
             <MenuList>
               <MenuGroup title="Profile">
                 <MenuItem gap={2}>
-                  <Box boxSize="36px">
-                    <Avatar
-                      size="full"
-                      name={currentUser?.name}
-                      src={currentUser?.avatar}
-                    />
-                  </Box>
-                  <Text fontWeight="bold">{currentUser?.name}</Text>
+                  <Avatar
+                    boxSize="40px"
+                    name={currentUser?.name}
+                    src={currentUser?.avatar}
+                  />
+                  <Text fontWeight="medium">{currentUser?.name}</Text>
                 </MenuItem>
               </MenuGroup>
 
@@ -120,7 +116,7 @@ export function Header() {
                 <Circle size="36px" bg="blackAlpha.200">
                   <IoLogOut size="20px" />
                 </Circle>
-                <Text fontWeight="bold">Logout</Text>
+                <Text fontWeight="medium">Logout</Text>
               </MenuItem>
             </MenuList>
           </Menu>

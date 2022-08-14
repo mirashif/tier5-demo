@@ -8,7 +8,7 @@
 
 Using React create a dummy Facebook home page with the following functionalities:  
 - [x] Listing of posts  
-- [ ] Actions on each post  
+- [x] Actions on each post  
   - [x] like,  
   - [x] comment,  
   - [x] share  

@@ -10,3 +10,14 @@ export function fetchCurrentUser(): User {
     avatar: faker.internet.avatar(),
   };
 }
+
+export function fetchOnlineUsers(): User[] {
+  return [...Array(Math.floor(Math.random() * 20))].map((_) => {
+    return {
+      id: faker.datatype.uuid(),
+      username: faker.internet.userName(),
+      name: faker.name.fullName(),
+      avatar: faker.internet.avatar(),
+    };
+  });
+}

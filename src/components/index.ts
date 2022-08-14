@@ -1,3 +1,3 @@
-export * from "./AddNewPost";
+export * from "./AddPost";
 export * from "./Header";
 export * from "./Posts";
