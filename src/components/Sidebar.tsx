@@ -2,12 +2,12 @@ import {
   Avatar,
   AvatarBadge,
   Box,
-  Container,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
   DrawerOverlay,
+  Heading,
   HStack,
   List,
   ListItem,
@@ -31,9 +31,10 @@ export const Sidebar = ({ variant, isOpen, onClose }: Props) => {
     <Box
       position="sticky"
       zIndex="sticky"
-      top={HEADER_HEIGHT}
-      maxH={`calc(100vh - ${HEADER_HEIGHT})`}
+      top={`${HEADER_HEIGHT}px`}
+      maxH={`calc(100vh - ${HEADER_HEIGHT}px)`}
       overflowY="scroll"
+      overflowX="hidden"
     >
       <SidebarContent />
     </Box>
@@ -54,13 +55,13 @@ export const Sidebar = ({ variant, isOpen, onClose }: Props) => {
 const SidebarContent = () => {
   const onlineUsers = useFacebookStore((state) => state.onlineUsers);
   return (
-    <Container as="aside" w="sm">
+    <Box as="aside" w="sm">
       <List my="4">
-        <Text fontSize="lg" fontWeight="medium" color="blackAlpha.700" mb="3">
+        <Heading size="md" color="blackAlpha.700" p="4">
           Online Users
-        </Text>
+        </Heading>
         {onlineUsers.map((user) => (
-          <ListItem key={user.id} w="full" h="52px" px="2">
+          <ListItem key={user.id} w="full" h="52px" px="4">
             <HStack spacing="3">
               <Avatar src={user.avatar} boxSize="36px">
                 <AvatarBadge
@@ -76,6 +77,6 @@ const SidebarContent = () => {
           </ListItem>
         ))}
       </List>
-    </Container>
+    </Box>
   );
 };

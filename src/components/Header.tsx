@@ -2,8 +2,9 @@ import {
   Avatar,
   Box,
   Button,
-  ButtonGroup,
   Circle,
+  Flex,
+  Heading,
   HStack,
   IconButton,
   Input,
@@ -15,6 +16,11 @@ import {
   MenuGroup,
   MenuItem,
   MenuList,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
   Text,
 } from "@chakra-ui/react";
 import { BsFacebook, BsSearch } from "react-icons/bs";
@@ -24,7 +30,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { useFacebookStore } from "~/store";
 
-export const HEADER_HEIGHT = "56px";
+export const HEADER_HEIGHT = 56;
 
 export type ShowMenu = boolean;
 
@@ -35,10 +41,13 @@ interface Props {
 
 export function Header({ showMenuButton, onShowSidebar }: Props) {
   const currentUser = useFacebookStore((state) => state.currentUser);
+  const messages = useFacebookStore((state) => state.messages);
+  const notifications = useFacebookStore((state) => state.notifications);
+
   return (
     <Box
       as="header"
-      h={HEADER_HEIGHT}
+      h={`${HEADER_HEIGHT}px`}
       w="full"
       bg="white"
       shadow="base"
@@ -80,38 +89,74 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
           )}
         </HStack>
 
-        <ButtonGroup>
-          {/* messenger */}
-          <Menu>
-            <MenuButton>
+        <HStack>
+          <Popover>
+            <PopoverTrigger>
               <IconButton
                 borderRadius="full"
                 aria-label="Messenger"
                 icon={<FaFacebookMessenger size="20px" />}
               />
-            </MenuButton>
-            <MenuList>
-              <Text fontSize="sm" textAlign="center" px="4" py="3">
-                There are no message
-              </Text>
-            </MenuList>
-          </Menu>
+            </PopoverTrigger>
+            <PopoverContent
+              maxH={`calc(100vh - (${HEADER_HEIGHT * 2}px))`}
+              w="sm"
+              p="2"
+              shadow="dark-lg"
+              overflowY="scroll"
+            >
+              <PopoverHeader borderBottom="none">
+                <Heading size="lg">Chats</Heading>
+              </PopoverHeader>
+              <PopoverBody p="0">
+                <Flex direction="column">
+                  {messages.map((message) => (
+                    <Flex key={message.id} gap="2" p="2" borderRadius="lg">
+                      <Avatar src={message.user.avatar} />
+                      <Flex direction="column">
+                        <Text noOfLines={1}>{message.user.name}</Text>
+                        <Text noOfLines={1}>{message.text}</Text>
+                      </Flex>
+                    </Flex>
+                  ))}
+                </Flex>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
 
-          {/* notifications */}
-          <Menu>
-            <MenuButton>
+          <Popover>
+            <PopoverTrigger>
               <IconButton
                 borderRadius="full"
                 aria-label="Notifications"
                 icon={<IoNotifications size="20px" />}
               />
-            </MenuButton>
-            <MenuList>
-              <Text fontSize="sm" textAlign="center" px="4" py="3">
-                There are no notifications
-              </Text>
-            </MenuList>
-          </Menu>
+            </PopoverTrigger>
+            <PopoverContent
+              maxH={`calc(100vh - (${HEADER_HEIGHT * 2}px))`}
+              w="sm"
+              p="2"
+              shadow="dark-lg"
+              overflowY="scroll"
+            >
+              <PopoverHeader borderBottom="none">
+                <Heading size="lg">Notifications</Heading>
+              </PopoverHeader>
+              <PopoverBody p="0">
+                <Flex direction="column">
+                  {notifications.map((notification) => (
+                    <Flex key={notification.id} gap="2" p="2" borderRadius="lg">
+                      <Avatar src={notification.user.avatar} />
+                      <Flex direction="column">
+                        <Text noOfLines={1}>{notification.user.name}</Text>
+                        <Text noOfLines={1}>{notification.text}</Text>
+                      </Flex>
+                    </Flex>
+                  ))}
+                </Flex>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
 
           {/* account */}
           <Menu>
@@ -122,10 +167,9 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
                 src={currentUser?.avatar}
               />
             </MenuButton>
-
-            <MenuList>
-              <MenuGroup title="Profile">
-                <MenuItem gap={2}>
+            <MenuList p="2" shadow="dark-lg">
+              <MenuGroup>
+                <MenuItem as="button" gap="2" p="2" borderRadius="lg">
                   <Avatar
                     boxSize="40px"
                     name={currentUser?.name}
@@ -137,7 +181,7 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
 
               <MenuDivider />
               {/* logout button */}
-              <MenuItem gap={2}>
+              <MenuItem as="button" gap="2" p="2" borderRadius="lg">
                 <Circle size="36px" bg="blackAlpha.200">
                   <IoLogOut size="20px" />
                 </Circle>
@@ -152,7 +196,7 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
               <GiHamburgerMenu size="20px" />
             </Button>
           )}
-        </ButtonGroup>
+        </HStack>
       </HStack>
     </Box>
   );

@@ -33,7 +33,14 @@ export function App() {
         showMenuButton={variants?.showMenu as ShowMenu}
         onShowSidebar={toggleSidebar}
       />
-      <Flex gap={4} px="4" maxW="5xl" align="start" justify="space-between">
+      <Flex
+        gap={4}
+        px="4"
+        maxW="5xl"
+        align="start"
+        justify="space-between"
+        zIndex="base"
+      >
         <Container as="main" w="full" px="0">
           <AddPost />
           <Posts />

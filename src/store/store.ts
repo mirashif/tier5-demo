@@ -5,8 +5,12 @@ import { devtools } from "zustand/middleware";
 import {
   Comment,
   fetchCurrentUser,
+  fetchFacebookMessages,
+  fetchFacebookNotifications,
   fetchFacebookPosts,
   fetchOnlineUsers,
+  Message,
+  Notification,
   Post,
   User,
 } from "~/services";
@@ -15,6 +19,9 @@ interface FacebookState {
   currentUser: User | null;
   posts: Post[] | [];
   onlineUsers: User[] | [];
+  messages: Message[] | [];
+  notifications: Notification[] | [];
+
   addPost: (text: Post["text"]) => void;
   toggleLike: (postId: Post["id"]) => void;
   addComment: (postId: Post["id"], text: Comment["text"]) => void;
@@ -25,6 +32,8 @@ export const useFacebookStore = create<FacebookState>()(
     currentUser: fetchCurrentUser(),
     posts: fetchFacebookPosts(),
     onlineUsers: fetchOnlineUsers(),
+    messages: fetchFacebookMessages(),
+    notifications: fetchFacebookNotifications(),
 
     addPost: (text: Post["text"]) => {
       set((state) => {
