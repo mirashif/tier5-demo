@@ -32,6 +32,7 @@ export const Sidebar = ({ variant, isOpen, onClose }: Props) => {
       position="sticky"
       zIndex="sticky"
       top={`${HEADER_HEIGHT}px`}
+      height="100vh"
       maxH={`calc(100vh - ${HEADER_HEIGHT}px)`}
       w="sm"
       minW="xs"
