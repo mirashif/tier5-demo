@@ -87,7 +87,7 @@ export const Posts = () => {
           <HStack spacing={2} pt={3} mb={3}>
             <Avatar src={post.user.avatar} boxSize="40px" />
             <Box>
-              <Text fontSize="md" fontWeight="medium">
+              <Text fontSize="md" fontWeight="semibold">
                 {post.user.name}
               </Text>
               <Text fontSize="sm">
@@ -176,7 +176,7 @@ export const Posts = () => {
                 <HStack key={comment.id} align="start">
                   <Avatar src={comment.user.avatar} boxSize="40px" />
                   <Box bgColor="gray.100" px={3} py={2} borderRadius="2xl">
-                    <Text fontSize="sm" fontWeight="medium">
+                    <Text fontSize="sm" fontWeight="semibold">
                       {comment.user.name}
                     </Text>
                     <Text>{comment.text}</Text>

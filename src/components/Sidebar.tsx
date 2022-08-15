@@ -73,7 +73,7 @@ const SidebarContent = () => {
                   bottom="2px"
                 />
               </Avatar>
-              <Text fontWeight="medium">{user.name}</Text>
+              <Text fontWeight="semibold">{user.name}</Text>
             </HStack>
           </ListItem>
         ))}
