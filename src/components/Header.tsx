@@ -27,6 +27,7 @@ import { BsFacebook, BsSearch } from "react-icons/bs";
 import { FaFacebookMessenger } from "react-icons/fa";
 import { IoLogOut, IoNotifications } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
 
 import { useFacebookStore } from "~/store";
 
@@ -40,6 +41,8 @@ interface Props {
 }
 
 export function Header({ showMenuButton, onShowSidebar }: Props) {
+  const navigate = useNavigate();
+
   const currentUser = useFacebookStore((state) => state.currentUser);
   const messages = useFacebookStore((state) => state.messages);
   const notifications = useFacebookStore((state) => state.notifications);
@@ -103,7 +106,7 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
               w="sm"
               p="2"
               shadow="dark-lg"
-              overflowY="scroll"
+              overflowY="auto"
             >
               <PopoverHeader borderBottom="none">
                 <Heading size="lg">Chats</Heading>
@@ -152,7 +155,7 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
               w="sm"
               p="2"
               shadow="dark-lg"
-              overflowY="scroll"
+              overflowY="auto"
             >
               <PopoverHeader borderBottom="none">
                 <Heading size="lg">Notifications</Heading>
@@ -203,7 +206,13 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
 
               <MenuDivider />
               {/* logout button */}
-              <MenuItem as="button" gap="2" p="2" borderRadius="lg">
+              <MenuItem
+                onClick={() => navigate("/")}
+                as="button"
+                gap="2"
+                p="2"
+                borderRadius="lg"
+              >
                 <Circle size="36px" bg="blackAlpha.200">
                   <IoLogOut size="20px" />
                 </Circle>
