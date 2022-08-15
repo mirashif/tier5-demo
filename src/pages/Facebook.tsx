@@ -41,7 +41,7 @@ export function Facebook() {
         justify="space-between"
         zIndex="base"
       >
-        <Container as="main" w="full" px="0">
+        <Container as="main" w="full" maxW="2xl" px="0">
           <AddPost />
           <Posts />
         </Container>

@@ -34,6 +34,7 @@ export const Sidebar = ({ variant, isOpen, onClose }: Props) => {
       top={`${HEADER_HEIGHT}px`}
       maxH={`calc(100vh - ${HEADER_HEIGHT}px)`}
       w="sm"
+      minW="xs"
       overflowY="scroll"
       overflowX="hidden"
     >
