@@ -33,6 +33,7 @@ export const Sidebar = ({ variant, isOpen, onClose }: Props) => {
       zIndex="sticky"
       top={`${HEADER_HEIGHT}px`}
       maxH={`calc(100vh - ${HEADER_HEIGHT}px)`}
+      w="sm"
       overflowY="scroll"
       overflowX="hidden"
     >
@@ -55,7 +56,7 @@ export const Sidebar = ({ variant, isOpen, onClose }: Props) => {
 const SidebarContent = () => {
   const onlineUsers = useFacebookStore((state) => state.onlineUsers);
   return (
-    <Box as="aside" w="sm">
+    <Box as="aside" w="full" maxW="sm">
       <List my="4">
         <Heading size="md" color="blackAlpha.700" p="4">
           Online Users
