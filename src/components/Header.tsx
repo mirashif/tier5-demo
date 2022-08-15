@@ -114,8 +114,23 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
                     <Flex key={message.id} gap="2" p="2" borderRadius="lg">
                       <Avatar src={message.user.avatar} />
                       <Flex direction="column">
-                        <Text noOfLines={1}>{message.user.name}</Text>
-                        <Text noOfLines={1}>{message.text}</Text>
+                        <Text noOfLines={1} fontWeight="semibold">
+                          {message.user.name}
+                        </Text>
+                        <Flex>
+                          <Text noOfLines={1} fontSize="sm">
+                            {message.text}
+                          </Text>
+                          <Text
+                            fontSize="sm"
+                            color="blackAlpha.500"
+                            noOfLines={1}
+                            flexGrow={1}
+                            flexShrink={0}
+                          >
+                            · {message.postedOn}m
+                          </Text>
+                        </Flex>
                       </Flex>
                     </Flex>
                   ))}
@@ -148,8 +163,15 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
                     <Flex key={notification.id} gap="2" p="2" borderRadius="lg">
                       <Avatar src={notification.user.avatar} />
                       <Flex direction="column">
-                        <Text noOfLines={1}>{notification.user.name}</Text>
-                        <Text noOfLines={1}>{notification.text}</Text>
+                        <Text noOfLines={3}>
+                          <Text as="span" fontWeight="semibold">
+                            {notification.user.name} &nbsp;
+                          </Text>
+                          <Text as="span">{notification.text}</Text>
+                        </Text>
+                        <Text fontSize="sm" color="blackAlpha.500">
+                          {notification.postedOn} hours ago
+                        </Text>
                       </Flex>
                     </Flex>
                   ))}
@@ -175,7 +197,7 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
                     name={currentUser?.name}
                     src={currentUser?.avatar}
                   />
-                  <Text fontWeight="medium">{currentUser?.name}</Text>
+                  <Text fontWeight="semibold">{currentUser?.name}</Text>
                 </MenuItem>
               </MenuGroup>
 
@@ -185,7 +207,7 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
                 <Circle size="36px" bg="blackAlpha.200">
                   <IoLogOut size="20px" />
                 </Circle>
-                <Text fontWeight="medium">Logout</Text>
+                <Text fontWeight="semibold">Logout</Text>
               </MenuItem>
             </MenuList>
           </Menu>
