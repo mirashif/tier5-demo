@@ -36,12 +36,18 @@ export function Facebook() {
       <Flex
         gap={4}
         px="4"
+        w="full"
         maxW="5xl"
         align="start"
-        justify="space-between"
+        justify={{ base: "center", lg: "space-between" }}
         zIndex="base"
       >
-        <Container as="main" w="full" maxW="2xl" px="0">
+        <Container
+          as="main"
+          minW={{ base: "full", md: "inherit" }}
+          px="0"
+          mx="0"
+        >
           <AddPost />
           <Posts />
         </Container>
