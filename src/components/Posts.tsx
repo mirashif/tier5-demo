@@ -49,7 +49,7 @@ export const Posts = () => {
           borderColor="gray.100"
           rounded="lg"
           shadow="base"
-          mt={6}
+          mt={4}
           px={4}
         >
           {/* post head */}

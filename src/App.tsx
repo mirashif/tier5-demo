@@ -1,4 +1,4 @@
-import { Container, HStack, useBreakpointValue } from "@chakra-ui/react";
+import { Container, Flex, useBreakpointValue } from "@chakra-ui/react";
 import { useState } from "react";
 
 import {
@@ -28,20 +28,13 @@ export function App() {
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
   return (
-    <>
+    <Flex direction="column" align="center">
       <Header
         showMenuButton={variants?.showMenu as ShowMenu}
         onShowSidebar={toggleSidebar}
       />
-      <HStack
-        spacing={4}
-        w="full"
-        maxW="5xl"
-        mx="auto"
-        align="start"
-        justify="center"
-      >
-        <Container as="main" w="full" maxW="full" mx="0">
+      <Flex gap={4} px="4" maxW="5xl" align="start" justify="space-between">
+        <Container as="main" w="full" px="0">
           <AddPost />
           <Posts />
         </Container>
@@ -50,7 +43,7 @@ export function App() {
           isOpen={isSidebarOpen}
           onClose={toggleSidebar}
         />
-      </HStack>
-    </>
+      </Flex>
+    </Flex>
   );
 }

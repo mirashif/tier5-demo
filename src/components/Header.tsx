@@ -24,6 +24,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { useFacebookStore } from "~/store";
 
+export const HEADER_HEIGHT = "56px";
+
 export type ShowMenu = boolean;
 
 interface Props {
@@ -36,7 +38,8 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
   return (
     <Box
       as="header"
-      h="56px"
+      h={HEADER_HEIGHT}
+      w="full"
       bg="white"
       shadow="base"
       display="flex"

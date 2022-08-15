@@ -1,6 +1,7 @@
 import {
   Avatar,
   AvatarBadge,
+  Box,
   Container,
   Drawer,
   DrawerBody,
@@ -12,6 +13,8 @@ import {
   ListItem,
   Text,
 } from "@chakra-ui/react";
+
+import { HEADER_HEIGHT } from "./Header";
 
 import { useFacebookStore } from "~/store";
 
@@ -25,7 +28,15 @@ interface Props {
 
 export const Sidebar = ({ variant, isOpen, onClose }: Props) => {
   return variant === "sidebar" ? (
-    <SidebarContent />
+    <Box
+      position="sticky"
+      zIndex="sticky"
+      top={HEADER_HEIGHT}
+      maxH={`calc(100vh - ${HEADER_HEIGHT})`}
+      overflowY="scroll"
+    >
+      <SidebarContent />
+    </Box>
   ) : (
     <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
       <DrawerOverlay>
@@ -43,8 +54,8 @@ export const Sidebar = ({ variant, isOpen, onClose }: Props) => {
 const SidebarContent = () => {
   const onlineUsers = useFacebookStore((state) => state.onlineUsers);
   return (
-    <Container as="aside" maxW="sm" position="sticky" top="56px">
-      <List my="6">
+    <Container as="aside" w="sm">
+      <List my="4">
         <Text fontSize="lg" fontWeight="medium" color="blackAlpha.700" mb="3">
           Online Users
         </Text>
