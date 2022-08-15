@@ -10,12 +10,17 @@ import {
   Input,
   Box,
   Text,
+  Menu,
+  MenuItem,
+  MenuList,
+  MenuButton,
 } from "@chakra-ui/react";
 import { faker } from "@faker-js/faker";
 import dayjs from "dayjs";
-import { BiComment } from "react-icons/bi";
+import { BiComment, BiCopy, BiShare } from "react-icons/bi";
 import { FiThumbsUp, FiShare } from "react-icons/fi";
 
+import { Post } from "~/services";
 import { useFacebookStore } from "~/store";
 
 export const Posts = () => {
@@ -30,6 +35,32 @@ export const Posts = () => {
       return;
     }
     addComment(postId, text);
+  };
+
+  const postCopyLink = () => {
+    const dummyUrl = faker.internet.url();
+    navigator.clipboard.writeText(dummyUrl);
+    toast({
+      title: "Post URL copied to clipboard",
+      status: "info",
+      duration: 2000,
+    });
+  };
+
+  const postWebShare = (post: Post) => {
+    try {
+      navigator.share({
+        title: `${currentUser?.name} shared a post`,
+        text: post.text,
+        url: faker.internet.url(),
+      });
+    } catch (error) {
+      toast({
+        title: "Web Share is not supported in this browser",
+        status: "error",
+        duration: 2000,
+      });
+    }
   };
 
   if (!posts || !currentUser) {
@@ -99,21 +130,24 @@ export const Posts = () => {
                 >
                   Comment
                 </Button>
-                <Button
-                  onClick={() => {
-                    const dummyUrl = faker.internet.avatar();
-                    navigator.clipboard.writeText(dummyUrl);
-                    toast({
-                      title: "Post URL copied to clipboard",
-                      status: "info",
-                      duration: 2000,
-                    });
-                  }}
-                  flex={1}
-                  leftIcon={<FiShare />}
-                >
-                  Share
-                </Button>
+                <Menu>
+                  <MenuButton flex={1}>
+                    <Button flex={1} leftIcon={<FiShare />}>
+                      Share
+                    </Button>
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem onClick={postCopyLink} icon={<BiCopy />}>
+                      Copy link
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => postWebShare(post)}
+                      icon={<BiShare />}
+                    >
+                      Web share
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
               </ButtonGroup>
             </HStack>
           </VStack>

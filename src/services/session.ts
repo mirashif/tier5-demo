@@ -12,7 +12,7 @@ export function fetchCurrentUser(): User {
 }
 
 export function fetchOnlineUsers(): User[] {
-  return [...Array(Math.floor(Math.random() * 20))].map((_) => {
+  return [...Array(Math.floor(Math.random() * 25))].map((_) => {
     return {
       id: faker.datatype.uuid(),
       username: faker.internet.userName(),
