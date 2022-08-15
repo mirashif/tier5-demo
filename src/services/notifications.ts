@@ -10,7 +10,7 @@ export const fetchFacebookNotifications = () => {
         name: faker.name.fullName(),
         avatar: faker.internet.avatar(),
       },
-      postedOn: faker.datatype.number({ max: 59, min: 0 }),
+      postedOn: faker.datatype.number({ max: 59, min: 1 }),
       text: faker.lorem.paragraphs(),
     };
   });
