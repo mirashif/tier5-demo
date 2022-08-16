@@ -1,7 +1,14 @@
 import { faker } from "@faker-js/faker";
 
 export const fetchFacebookMessages = () => {
-  const messages = [...Array(Math.floor(Math.random() * 30))].map((_) => {
+  const messages = [
+    ...Array(
+      faker.datatype.number({
+        min: 15,
+        max: 20,
+      })
+    ),
+  ].map((_) => {
     return {
       id: faker.datatype.uuid(),
       user: {

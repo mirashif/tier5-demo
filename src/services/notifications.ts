@@ -1,7 +1,16 @@
 import { faker } from "@faker-js/faker";
 
 export const fetchFacebookNotifications = () => {
-  const notifications = [...Array(Math.floor(Math.random() * 30))].map((_) => {
+  const notifications = [
+    ...Array(
+      Math.floor(
+        faker.datatype.number({
+          min: 15,
+          max: 20,
+        })
+      )
+    ),
+  ].map((_) => {
     return {
       id: faker.datatype.uuid(),
       user: {

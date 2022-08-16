@@ -40,7 +40,6 @@ export function Facebook() {
         maxW="5xl"
         align="start"
         justify={{ base: "center", lg: "space-between" }}
-        zIndex="base"
       >
         <Container
           as="main"

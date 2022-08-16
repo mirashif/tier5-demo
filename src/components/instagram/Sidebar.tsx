@@ -30,7 +30,6 @@ export const Sidebar = ({ variant, isOpen, onClose }: Props) => {
   return variant === "sidebar" ? (
     <Box
       position="sticky"
-      zIndex="sticky"
       top={`${HEADER_HEIGHT}px`}
       height="100vh"
       maxH={`calc(100vh - ${HEADER_HEIGHT}px)`}

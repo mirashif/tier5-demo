@@ -10,7 +10,14 @@ export function fetchCurrentUser(): User {
 }
 
 export function fetchOnlineUsers(): User[] {
-  return [...Array(Math.floor(Math.random() * 25))].map((_) => {
+  return [
+    ...Array(
+      faker.datatype.number({
+        min: 15,
+        max: 30,
+      })
+    ),
+  ].map((_) => {
     return {
       id: faker.datatype.uuid(),
       username: faker.internet.userName(),

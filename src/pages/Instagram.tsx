@@ -15,12 +15,11 @@ export function Instagram() {
         maxW="5xl"
         align="start"
         justify={{ base: "center", lg: "space-between" }}
-        zIndex="base"
       >
         <Container
           as="main"
           maxW="470px"
-          minW={{ base: "full", md: "inherit" }}
+          minW={{ base: "full", sm: "inherit" }}
           px="0"
           mx="0"
         >

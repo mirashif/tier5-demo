@@ -14,6 +14,7 @@ import {
   MenuItem,
   MenuList,
   MenuButton,
+  Image,
 } from "@chakra-ui/react";
 import { faker } from "@faker-js/faker";
 import { BiComment, BiCopy, BiShare } from "react-icons/bi";
@@ -88,9 +89,15 @@ export const Posts = () => {
             </Text>
           </HStack>
 
-          <Text fontSize="md" py={1}>
-            {post.text}
-          </Text>
+          {/* post image */}
+          <Image
+            src={post.imageUrl}
+            alt={post.text}
+            objectFit="contain"
+            w="full"
+            h="full"
+            maxH="585px"
+          />
 
           {/* post action buttons */}
           <VStack align="stretch" spacing={0}>

@@ -3,7 +3,15 @@ import { faker } from "@faker-js/faker";
 import { User } from "./session";
 
 export function fetchFacebookPosts(limit?: number) {
-  const posts: Post[] = [...Array(limit || 25)].map((_) => {
+  const posts: Post[] = [
+    ...Array(
+      limit ||
+        faker.datatype.number({
+          min: 15,
+          max: 20,
+        })
+    ),
+  ].map((_) => {
     return {
       id: faker.datatype.uuid(),
       user: {
@@ -39,7 +47,8 @@ export function fetchInstagramPosts(limit?: number) {
   const posts: InstagramPost[] = fetchFacebookPosts(limit).map((post) => {
     return {
       ...post,
-      image: faker.image.image(),
+      imageUrl: faker.image.imageUrl(470, 585, "random", true),
+      text: faker.lorem.lines(),
     };
   });
 
@@ -64,5 +73,5 @@ export interface Post {
 }
 
 export interface InstagramPost extends Post {
-  image: string;
+  imageUrl: string;
 }
