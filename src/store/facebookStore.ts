@@ -3,7 +3,7 @@ import create from "zustand";
 import { devtools } from "zustand/middleware";
 
 import {
-  Comment,
+  FacebookComment,
   fetchCurrentUser,
   fetchFacebookMessages,
   fetchFacebookNotifications,
@@ -11,20 +11,23 @@ import {
   fetchOnlineUsers,
   FacebookMessage,
   FacebookNotification,
-  Post,
+  FacebookPost,
   User,
 } from "~/services";
 
 interface FacebookState {
   currentUser: User | null;
-  posts: Post[] | [];
+  posts: FacebookPost[] | [];
   onlineUsers: User[] | [];
   messages: FacebookMessage[] | [];
   notifications: FacebookNotification[] | [];
 
-  addPost: (text: Post["text"]) => void;
-  toggleLike: (postId: Post["id"]) => void;
-  addComment: (postId: Post["id"], text: Comment["text"]) => void;
+  addPost: (text: FacebookPost["text"]) => void;
+  toggleLike: (postId: FacebookPost["id"]) => void;
+  addComment: (
+    postId: FacebookPost["id"],
+    text: FacebookComment["text"]
+  ) => void;
 }
 
 export const useFacebookStore = create<FacebookState>()(
@@ -35,7 +38,7 @@ export const useFacebookStore = create<FacebookState>()(
     messages: fetchFacebookMessages(),
     notifications: fetchFacebookNotifications(),
 
-    addPost: (text: Post["text"]) => {
+    addPost: (text: FacebookPost["text"]) => {
       set((state) => {
         if (!state.currentUser) {
           throw new Error("User not logged in");
@@ -53,7 +56,7 @@ export const useFacebookStore = create<FacebookState>()(
       });
     },
 
-    toggleLike: (postId: Post["id"]) => {
+    toggleLike: (postId: FacebookPost["id"]) => {
       set((state) => ({
         ...state,
         posts: state.posts?.map((post) => {
@@ -70,12 +73,12 @@ export const useFacebookStore = create<FacebookState>()(
       }));
     },
 
-    addComment: (postId: Post["id"], text: string) => {
+    addComment: (postId: FacebookPost["id"], text: string) => {
       set((state) => {
         if (!state.currentUser) {
           throw new Error("User not logged in");
         }
-        const comment: Comment = {
+        const comment: FacebookComment = {
           id: faker.datatype.uuid(),
           text,
           createdAt: new Date(),

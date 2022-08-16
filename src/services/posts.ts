@@ -62,6 +62,7 @@ export function fetchInstagramPosts(limit?: number) {
     return {
       ...post,
       imageUrl: faker.image.imageUrl(470, 585, "random", true),
+      saved: faker.datatype.boolean(),
       text: faker.lorem.lines(),
       comments: [
         ...Array(

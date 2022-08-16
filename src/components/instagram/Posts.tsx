@@ -26,13 +26,14 @@ import { BiCopy, BiShare } from "react-icons/bi";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {
   BsBookmark,
+  BsBookmarkFill,
   BsChat,
   BsHeart,
   BsHeartFill,
   BsShare,
 } from "react-icons/bs";
 
-import { Post } from "~/services";
+import { InstagramPost } from "~/services";
 import { useInstagramStore } from "~/store";
 
 dayjs.extend(relativeTime);
@@ -43,6 +44,7 @@ export const Posts = () => {
   const addComment = useInstagramStore((state) => state.addComment);
   const currentUser = useInstagramStore((state) => state.currentUser);
   const toggleLike = useInstagramStore((state) => state.toggleLike);
+  const toggleSave = useInstagramStore((state) => state.toggleSave);
 
   const addNewComment = (postId: string, text: string) => {
     if (!postId || !text.trim()) {
@@ -61,7 +63,7 @@ export const Posts = () => {
     });
   };
 
-  const postWebShare = (post: Post) => {
+  const postWebShare = (post: InstagramPost) => {
     try {
       navigator.share({
         title: `${currentUser?.name} shared a post`,
@@ -174,7 +176,17 @@ export const Posts = () => {
                 </MenuList>
               </Menu>
               <Spacer ml="auto" />
-              <IconButton aria-label="Save" icon={<BsBookmark size="24px" />} />
+              <IconButton
+                onClick={() => toggleSave(post.id)}
+                aria-label="Save"
+                icon={
+                  post.saved ? (
+                    <BsBookmarkFill size="24px" />
+                  ) : (
+                    <BsBookmark size="24px" />
+                  )
+                }
+              />
             </ButtonGroup>
 
             <Box px="3" mb="2">
