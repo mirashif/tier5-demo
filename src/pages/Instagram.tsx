@@ -1,30 +1,10 @@
-import { Container, Flex, useBreakpointValue } from "@chakra-ui/react";
-import { useState } from "react";
+import { Circle, Container, Flex, Image, Text } from "@chakra-ui/react";
 
-import {
-  AddPost,
-  Header,
-  Posts,
-  Sidebar,
-  SidebarVariant,
-} from "~/components/instagram";
-
-type Breakpoint = { sidebar: SidebarVariant };
-
-const base: Breakpoint = {
-  sidebar: "drawer",
-};
-const lg: Breakpoint = { sidebar: "sidebar" };
+import { Header, Posts } from "~/components/instagram";
+import { useInstagramStore } from "~/store";
 
 export function Instagram() {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const variants = useBreakpointValue<Breakpoint>({
-    base,
-    lg,
-  });
-
-  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
-
+  const stories = useInstagramStore((state) => state.stories);
   return (
     <Flex direction="column" align="center">
       <Header />
@@ -39,18 +19,52 @@ export function Instagram() {
       >
         <Container
           as="main"
+          maxW="470px"
           minW={{ base: "full", md: "inherit" }}
           px="0"
           mx="0"
         >
-          <AddPost />
+          {/* stories */}
+          <Flex
+            as="section"
+            aria-label="Stories"
+            p="4"
+            mt="5"
+            gap="4"
+            border="1px"
+            borderColor="gray.200"
+            borderRadius="lg"
+            overflowX="auto"
+          >
+            {stories.map(({ id, user }) => (
+              <Flex
+                key={id}
+                gap="2"
+                direction="column"
+                align="center"
+                justify="center"
+                maxW="66px"
+              >
+                <Circle
+                  size="64px"
+                  bgGradient="linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)"
+                >
+                  <Circle p="2px" bg="white">
+                    <Image
+                      src={user.avatar}
+                      boxSize="56px"
+                      borderRadius="full"
+                    />
+                  </Circle>
+                </Circle>
+                <Text fontSize="12px" maxW="66px" noOfLines={1}>
+                  {user.username}
+                </Text>
+              </Flex>
+            ))}
+          </Flex>
           <Posts />
         </Container>
-        <Sidebar
-          variant={variants?.sidebar as SidebarVariant}
-          isOpen={isSidebarOpen}
-          onClose={toggleSidebar}
-        />
       </Flex>
     </Flex>
   );

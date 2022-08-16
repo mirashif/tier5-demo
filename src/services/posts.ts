@@ -1,5 +1,7 @@
 import { faker } from "@faker-js/faker";
 
+import { User } from "./session";
+
 export function fetchFacebookPosts(limit?: number) {
   const posts: Post[] = [...Array(limit || 25)].map((_) => {
     return {
@@ -33,11 +35,15 @@ export function fetchFacebookPosts(limit?: number) {
   return posts;
 }
 
-export interface User {
-  id: string;
-  username: string;
-  name: string;
-  avatar: string;
+export function fetchInstagramPosts(limit?: number) {
+  const posts: InstagramPost[] = fetchFacebookPosts(limit).map((post) => {
+    return {
+      ...post,
+      image: faker.image.image(),
+    };
+  });
+
+  return posts;
 }
 
 export interface Comment {
@@ -55,4 +61,8 @@ export interface Post {
   likes: number;
   liked: boolean;
   comments: Comment[] | [];
+}
+
+export interface InstagramPost extends Post {
+  image: string;
 }

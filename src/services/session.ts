@@ -1,7 +1,5 @@
 import { faker } from "@faker-js/faker";
 
-import { User } from "./posts";
-
 export function fetchCurrentUser(): User {
   return {
     id: faker.datatype.uuid(),
@@ -20,4 +18,11 @@ export function fetchOnlineUsers(): User[] {
       avatar: faker.internet.avatar(),
     };
   });
+}
+
+export interface User {
+  id: string;
+  username: string;
+  name: string;
+  avatar: string;
 }

@@ -16,18 +16,17 @@ import {
   MenuButton,
 } from "@chakra-ui/react";
 import { faker } from "@faker-js/faker";
-import dayjs from "dayjs";
 import { BiComment, BiCopy, BiShare } from "react-icons/bi";
 import { FiThumbsUp, FiShare } from "react-icons/fi";
 
 import { Post } from "~/services";
-import { useFacebookStore } from "~/store";
+import { useFacebookStore, useInstagramStore } from "~/store";
 
 export const Posts = () => {
   const toast = useToast();
+  const posts = useInstagramStore((state) => state.posts);
   const addComment = useFacebookStore((state) => state.addComment);
   const currentUser = useFacebookStore((state) => state.currentUser);
-  const posts = useFacebookStore((state) => state.posts);
   const toggleLike = useFacebookStore((state) => state.toggleLike);
 
   const addNewComment = (postId: string, text: string) => {
@@ -77,23 +76,16 @@ export const Posts = () => {
         <Box
           key={post.id}
           border="1px"
-          borderColor="gray.100"
+          borderColor="gray.200"
           rounded="lg"
-          shadow="base"
           mt={4}
-          px={4}
         >
           {/* post head */}
-          <HStack spacing={2} pt={3} mb={3}>
-            <Avatar src={post.user.avatar} boxSize="40px" />
-            <Box>
-              <Text fontSize="md" fontWeight="semibold">
-                {post.user.name}
-              </Text>
-              <Text fontSize="sm">
-                {dayjs(post.postedOn).format("MMM D, YYYY")}
-              </Text>
-            </Box>
+          <HStack spacing="3" py="2" px="3">
+            <Avatar src={post.user.avatar} boxSize="32px" />
+            <Text fontSize="14px" fontWeight="semibold">
+              {post.user.name}
+            </Text>
           </HStack>
 
           <Text fontSize="md" py={1}>
