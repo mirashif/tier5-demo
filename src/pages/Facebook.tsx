@@ -8,7 +8,7 @@ import {
   ShowMenu,
   Sidebar,
   SidebarVariant,
-} from "~/components";
+} from "~/components/facebook";
 
 type Breakpoint = { sidebar: SidebarVariant; showMenu: ShowMenu };
 
