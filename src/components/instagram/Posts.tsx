@@ -77,7 +77,7 @@ export const Posts = () => {
         <Box
           key={post.id}
           border="1px"
-          borderColor="gray.200"
+          borderColor="gray.300"
           rounded="lg"
           mt={4}
         >

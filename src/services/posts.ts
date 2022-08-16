@@ -24,7 +24,14 @@ export function fetchFacebookPosts(limit?: number) {
       text: faker.lorem.paragraphs(),
       likes: faker.datatype.number(100),
       liked: faker.datatype.boolean(),
-      comments: [...Array(Math.floor(Math.random() * 10))].map((__) => {
+      comments: [
+        ...Array(
+          faker.datatype.number({
+            min: 1,
+            max: 10,
+          })
+        ),
+      ].map((__) => {
         return {
           id: faker.datatype.uuid(),
           text: faker.lorem.lines(),
@@ -49,6 +56,31 @@ export function fetchInstagramPosts(limit?: number) {
       ...post,
       imageUrl: faker.image.imageUrl(470, 585, "random", true),
       text: faker.lorem.lines(),
+      comments: [
+        ...Array(
+          faker.datatype.number({
+            min: 1,
+            max: 5,
+          })
+        ),
+      ].map((__) => {
+        return {
+          id: faker.datatype.uuid(),
+          text: faker.lorem.lines(
+            faker.datatype.number({
+              min: 1,
+              max: 3,
+            })
+          ),
+          createdAt: faker.date.past(),
+          user: {
+            id: faker.datatype.uuid(),
+            username: faker.internet.userName(),
+            name: faker.name.fullName(),
+            avatar: faker.internet.avatar(),
+          },
+        };
+      }),
     };
   });
 

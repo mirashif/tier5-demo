@@ -136,13 +136,18 @@ export const Posts = () => {
                       Share
                     </Button>
                   </MenuButton>
-                  <MenuList>
-                    <MenuItem onClick={postCopyLink} icon={<BiCopy />}>
+                  <MenuList p="2" w="2xs" borderRadius="md">
+                    <MenuItem
+                      onClick={postCopyLink}
+                      icon={<BiCopy size="20px" />}
+                      borderRadius="md"
+                    >
                       Copy link
                     </MenuItem>
                     <MenuItem
                       onClick={() => postWebShare(post)}
-                      icon={<BiShare />}
+                      icon={<BiShare size="20px" />}
+                      borderRadius="md"
                     >
                       Web share
                     </MenuItem>

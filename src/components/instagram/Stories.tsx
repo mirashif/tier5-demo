@@ -12,7 +12,7 @@ export const Stories = () => {
       mt="5"
       gap="4"
       border="1px"
-      borderColor="gray.200"
+      borderColor="gray.300"
       borderRadius="lg"
       overflowX="auto"
     >
