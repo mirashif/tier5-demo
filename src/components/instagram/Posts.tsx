@@ -4,7 +4,6 @@ import {
   Spinner,
   HStack,
   Avatar,
-  VStack,
   ButtonGroup,
   Button,
   Input,
@@ -15,20 +14,35 @@ import {
   MenuList,
   MenuButton,
   Image,
+  IconButton,
+  Flex,
+  Spacer,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { faker } from "@faker-js/faker";
-import { BiComment, BiCopy, BiShare } from "react-icons/bi";
-import { FiThumbsUp, FiShare } from "react-icons/fi";
+import dayjs from "dayjs";
+import { BiCopy, BiShare } from "react-icons/bi";
+import relativeTime from "dayjs/plugin/relativeTime";
+import {
+  BsBookmark,
+  BsChat,
+  BsHeart,
+  BsHeartFill,
+  BsShare,
+} from "react-icons/bs";
 
 import { Post } from "~/services";
-import { useFacebookStore, useInstagramStore } from "~/store";
+import { useInstagramStore } from "~/store";
+
+dayjs.extend(relativeTime);
 
 export const Posts = () => {
   const toast = useToast();
   const posts = useInstagramStore((state) => state.posts);
-  const addComment = useFacebookStore((state) => state.addComment);
-  const currentUser = useFacebookStore((state) => state.currentUser);
-  const toggleLike = useFacebookStore((state) => state.toggleLike);
+  const addComment = useInstagramStore((state) => state.addComment);
+  const currentUser = useInstagramStore((state) => state.currentUser);
+  const toggleLike = useInstagramStore((state) => state.toggleLike);
 
   const addNewComment = (postId: string, text: string) => {
     if (!postId || !text.trim()) {
@@ -96,65 +110,114 @@ export const Posts = () => {
             objectFit="contain"
             w="full"
             h="full"
+            minW="470px"
+            minH="470px"
             maxH="585px"
           />
 
-          {/* post action buttons */}
-          <VStack align="stretch" spacing={0}>
-            <HStack py={2.5} justify="space-between">
-              <Text>{post.likes} Likes</Text>
-              <Text>{post.comments.length} Comments</Text>
-            </HStack>
-            <HStack py={1} borderY="1px" borderColor="gray.300">
-              <ButtonGroup
-                flex={1}
-                spacing={1}
-                variant="ghost"
-                colorScheme="blackAlpha"
-              >
-                <Button
-                  onClick={() => toggleLike(post.id)}
-                  flex={1}
-                  leftIcon={<FiThumbsUp />}
-                  color={post.liked ? "blue.400" : undefined}
-                >
-                  {post.liked ? "Liked" : "Like"}
-                </Button>
-                <Button
-                  as="label"
-                  htmlFor={`comment-${post.id}`}
-                  cursor="pointer"
-                  flex={1}
-                  leftIcon={<BiComment />}
-                >
-                  Comment
-                </Button>
-                <Menu>
-                  <MenuButton flex={1}>
-                    <Button flex={1} leftIcon={<FiShare />}>
-                      Share
-                    </Button>
-                  </MenuButton>
-                  <MenuList>
-                    <MenuItem onClick={postCopyLink} icon={<BiCopy />}>
-                      Copy link
-                    </MenuItem>
-                    <MenuItem
-                      onClick={() => postWebShare(post)}
-                      icon={<BiShare />}
-                    >
-                      Web share
-                    </MenuItem>
-                  </MenuList>
-                </Menu>
-              </ButtonGroup>
-            </HStack>
-          </VStack>
+          <Flex direction="column">
+            {/* post action buttons */}
+            <ButtonGroup
+              colorScheme="black"
+              variant="ghost"
+              size="md"
+              spacing="0"
+              px="1"
+              pb="6px"
+              display="flex"
+            >
+              <IconButton
+                onClick={() => toggleLike(post.id)}
+                aria-label="Like"
+                icon={
+                  post.liked ? (
+                    <BsHeartFill fill="#ed4956" size="24px" />
+                  ) : (
+                    <BsHeart size="24px" />
+                  )
+                }
+              />
+              <IconButton
+                as="label"
+                htmlFor={`comment-${post.id}`}
+                aria-label="Comment"
+                icon={<BsChat size="24px" />}
+              />
+              <Menu>
+                <MenuButton>
+                  <IconButton
+                    aria-label="Share post"
+                    icon={<BsShare size="24px" />}
+                  />
+                </MenuButton>
+                <MenuList w="230px" py="1" shadow="md" borderRadius="base">
+                  <MenuItem
+                    onClick={postCopyLink}
+                    as="button"
+                    gap="3"
+                    px="4"
+                    py="2"
+                  >
+                    <BiCopy size="16px" />
+                    <Text fontSize="14px">Copy link</Text>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => postWebShare(post)}
+                    as="button"
+                    gap="3"
+                    px="4"
+                    py="2"
+                  >
+                    <BiShare size="16px" />
+                    <Text fontSize="14px">Web share</Text>
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+              <Spacer ml="auto" />
+              <IconButton aria-label="Save" icon={<BsBookmark size="24px" />} />
+            </ButtonGroup>
 
-          {/* add a comment */}
-          <VStack align="stretch" spacing={3} my={3}>
-            <HStack align="center">
-              <Avatar src={currentUser.avatar} boxSize="40px" />
+            <Box px="3" mb="2">
+              <Text as="span" fontSize="14px" fontWeight="bold">
+                {post.likes} likes
+              </Text>
+            </Box>
+
+            {/* post comments */}
+            <Flex direction="column">
+              {post.comments.map((comment) => (
+                <Text
+                  key={comment.id}
+                  noOfLines={3}
+                  lineHeight="18px"
+                  px="3"
+                  mb="3"
+                >
+                  <Text as="span" fontSize="14px" fontWeight="bold">
+                    {comment.user.username}
+                  </Text>
+                  &nbsp;
+                  <Text as="span" fontSize="14px">
+                    {comment.text}
+                  </Text>
+                </Text>
+              ))}
+            </Flex>
+
+            <Box px="3" mb="3" lineHeight="10px">
+              <Text fontSize="10px" textTransform="uppercase" color="gray.600">
+                {dayjs().to(dayjs(post.postedOn))}
+              </Text>
+            </Box>
+
+            {/* add a comment */}
+            <InputGroup
+              px="3"
+              py="1"
+              h="50px"
+              borderTop="1px"
+              borderColor="gray.100"
+            >
               <Input
                 id={`comment-${post.id}`}
                 onKeyDown={(e) => {
@@ -163,27 +226,25 @@ export const Posts = () => {
                     e.currentTarget.value = "";
                   }
                 }}
-                variant="filled"
-                placeholder="Write a public comment..."
-                borderRadius="full"
+                placeholder="Add a comment..."
+                variant="unstyled"
+                fontSize="14px"
               />
-            </HStack>
-
-            {/* post comments */}
-            <VStack align="start" spacing={3}>
-              {post.comments.map((comment) => (
-                <HStack key={comment.id} align="start">
-                  <Avatar src={comment.user.avatar} boxSize="40px" />
-                  <Box bgColor="gray.100" px={3} py={2} borderRadius="2xl">
-                    <Text fontSize="sm" fontWeight="semibold">
-                      {comment.user.name}
-                    </Text>
-                    <Text>{comment.text}</Text>
-                  </Box>
-                </HStack>
-              ))}
-            </VStack>
-          </VStack>
+              <InputRightElement my="1" mr="3">
+                <Button
+                  onClick={() => addNewComment(post.id, "hello!")}
+                  variant="ghost"
+                  colorScheme="black"
+                  color="blue.400"
+                  h="18px"
+                  fontSize="14px"
+                  fontWeight="bold"
+                >
+                  Post
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+          </Flex>
         </Box>
       ))}
       <Text fontSize="sm" textAlign="center" my="6">

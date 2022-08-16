@@ -1,6 +1,8 @@
 import { faker } from "@faker-js/faker";
 
-export function fetchCurrentUser(): User {
+export type User = ReturnType<typeof fetchCurrentUser>;
+
+export function fetchCurrentUser() {
   return {
     id: faker.datatype.uuid(),
     username: faker.internet.userName(),
@@ -9,7 +11,7 @@ export function fetchCurrentUser(): User {
   };
 }
 
-export function fetchOnlineUsers(): User[] {
+export function fetchOnlineUsers() {
   return [
     ...Array(
       faker.datatype.number({
@@ -25,11 +27,4 @@ export function fetchOnlineUsers(): User[] {
       avatar: faker.internet.avatar(),
     };
   });
-}
-
-export interface User {
-  id: string;
-  username: string;
-  name: string;
-  avatar: string;
 }

@@ -29,7 +29,7 @@ import { IoLogOut, IoNotifications } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 
-import { useFacebookStore } from "~/store";
+import { useInstagramStore } from "~/store";
 
 export const HEADER_HEIGHT = 56;
 
@@ -43,9 +43,9 @@ interface Props {
 export function Header({ showMenuButton, onShowSidebar }: Props) {
   const navigate = useNavigate();
 
-  const currentUser = useFacebookStore((state) => state.currentUser);
-  const messages = useFacebookStore((state) => state.messages);
-  const notifications = useFacebookStore((state) => state.notifications);
+  const currentUser = useInstagramStore((state) => state.currentUser);
+  const messages = useInstagramStore((state) => state.messages);
+  const notifications = useInstagramStore((state) => state.notifications);
 
   return (
     <Box

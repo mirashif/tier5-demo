@@ -1,5 +1,7 @@
 import { faker } from "@faker-js/faker";
 
+export type FacebookMessage = ReturnType<typeof fetchFacebookMessages>[0];
+
 export const fetchFacebookMessages = () => {
   const messages = [
     ...Array(
@@ -24,5 +26,3 @@ export const fetchFacebookMessages = () => {
 
   return messages.sort((a, b) => a.postedOn - b.postedOn);
 };
-
-export type Message = ReturnType<typeof fetchFacebookMessages>[0];

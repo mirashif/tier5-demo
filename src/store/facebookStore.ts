@@ -9,8 +9,8 @@ import {
   fetchFacebookNotifications,
   fetchFacebookPosts,
   fetchOnlineUsers,
-  Message,
-  Notification,
+  FacebookMessage,
+  FacebookNotification,
   Post,
   User,
 } from "~/services";
@@ -19,8 +19,8 @@ interface FacebookState {
   currentUser: User | null;
   posts: Post[] | [];
   onlineUsers: User[] | [];
-  messages: Message[] | [];
-  notifications: Notification[] | [];
+  messages: FacebookMessage[] | [];
+  notifications: FacebookNotification[] | [];
 
   addPost: (text: Post["text"]) => void;
   toggleLike: (postId: Post["id"]) => void;

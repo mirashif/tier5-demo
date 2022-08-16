@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
 
-import { User } from "./session";
+export type InstagramStory = ReturnType<typeof fetchInstagramStories>[0];
 
-export function fetchInstagramStories(): Story[] {
+export function fetchInstagramStories() {
   return [
     ...Array(
       faker.datatype.number({
@@ -22,10 +22,4 @@ export function fetchInstagramStories(): Story[] {
       imageUrl: faker.image.imageUrl(),
     };
   });
-}
-
-export interface Story {
-  id: string;
-  user: User;
-  imageUrl: string;
 }

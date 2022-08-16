@@ -1,9 +1,16 @@
 import { faker } from "@faker-js/faker";
 
-import { User } from "./session";
+export type FacebookPost = ReturnType<typeof fetchFacebookPosts>[0];
+export type FacebookComment = ReturnType<
+  typeof fetchFacebookPosts
+>[0]["comments"][0];
+export type InstagramPost = ReturnType<typeof fetchInstagramPosts>[0];
+export type InstagramComment = ReturnType<
+  typeof fetchInstagramPosts
+>[0]["comments"][0];
 
 export function fetchFacebookPosts(limit?: number) {
-  const posts: Post[] = [
+  const posts = [
     ...Array(
       limit ||
         faker.datatype.number({
@@ -51,7 +58,7 @@ export function fetchFacebookPosts(limit?: number) {
 }
 
 export function fetchInstagramPosts(limit?: number) {
-  const posts: InstagramPost[] = fetchFacebookPosts(limit).map((post) => {
+  const posts = fetchFacebookPosts(limit).map((post) => {
     return {
       ...post,
       imageUrl: faker.image.imageUrl(470, 585, "random", true),
@@ -85,25 +92,4 @@ export function fetchInstagramPosts(limit?: number) {
   });
 
   return posts;
-}
-
-export interface Comment {
-  id: string;
-  text: string;
-  createdAt: Date;
-  user: User;
-}
-
-export interface Post {
-  id: string;
-  user: User;
-  postedOn: Date;
-  text: string;
-  likes: number;
-  liked: boolean;
-  comments: Comment[] | [];
-}
-
-export interface InstagramPost extends Post {
-  imageUrl: string;
 }

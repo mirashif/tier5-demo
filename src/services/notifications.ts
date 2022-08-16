@@ -1,5 +1,9 @@
 import { faker } from "@faker-js/faker";
 
+export type FacebookNotification = ReturnType<
+  typeof fetchFacebookNotifications
+>[0];
+
 export const fetchFacebookNotifications = () => {
   const notifications = [
     ...Array(
@@ -26,5 +30,3 @@ export const fetchFacebookNotifications = () => {
 
   return notifications.sort((a, b) => a.postedOn - b.postedOn);
 };
-
-export type Notification = ReturnType<typeof fetchFacebookNotifications>[0];
