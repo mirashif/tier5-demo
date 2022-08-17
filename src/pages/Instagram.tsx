@@ -8,8 +8,10 @@ export function Instagram() {
       <Header />
       <Flex
         gap="4"
-        px="4"
-        my="7"
+        my={{
+          base: "0",
+          sm: "7",
+        }}
         w="full"
         maxW="5xl"
         align="start"

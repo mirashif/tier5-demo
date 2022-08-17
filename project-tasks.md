@@ -78,7 +78,7 @@ Functionalities required:
   - [x] messages, 
   - [x] profile, and more.
 - [x] Implement a dummy API call that will return the list of posts that can be used to render posts in the UI.  
-- [ ] Responsive design
+- [x] Responsive design
   `
 
 You can use the below JSON as a reference for the API response, add more fields to the JSON if required.

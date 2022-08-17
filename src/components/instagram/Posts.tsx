@@ -120,10 +120,8 @@ export const Posts = () => {
             src={post.imageUrl}
             alt={post.text}
             objectFit="contain"
-            w="full"
-            h="full"
-            minW="470px"
-            minH="470px"
+            w="470px"
+            h="auto"
             maxH="585px"
           />
 
