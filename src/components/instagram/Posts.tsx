@@ -32,6 +32,7 @@ import {
   BsHeartFill,
   BsShare,
 } from "react-icons/bs";
+import { useRef } from "react";
 
 import { InstagramPost } from "~/services";
 import { useInstagramStore } from "~/store";
@@ -40,17 +41,26 @@ dayjs.extend(relativeTime);
 
 export const Posts = () => {
   const toast = useToast();
+
   const posts = useInstagramStore((state) => state.posts);
   const addComment = useInstagramStore((state) => state.addComment);
   const currentUser = useInstagramStore((state) => state.currentUser);
   const toggleLike = useInstagramStore((state) => state.toggleLike);
   const toggleSave = useInstagramStore((state) => state.toggleSave);
 
-  const addNewComment = (postId: string, text: string) => {
-    if (!postId || !text.trim()) {
+  const commentRefs = useRef<Array<HTMLInputElement | null>>([]);
+
+  const addNewComment = (postId: string, commentRefIdx: number) => {
+    const ref = commentRefs.current[commentRefIdx];
+    if (!ref) {
       return;
     }
-    addComment(postId, text);
+
+    const text = ref.value.trim();
+    if (postId && text) {
+      addComment(postId, ref.value);
+      ref.value = "";
+    }
   };
 
   const postCopyLink = () => {
@@ -89,7 +99,7 @@ export const Posts = () => {
 
   return (
     <>
-      {posts.map((post) => (
+      {posts.map((post, idx) => (
         <Box
           key={post.id}
           border="1px"
@@ -231,11 +241,11 @@ export const Posts = () => {
               borderColor="gray.100"
             >
               <Input
+                ref={(el) => (commentRefs.current[idx] = el)}
                 id={`comment-${post.id}`}
                 onKeyDown={(e) => {
                   if (e.key == "Enter") {
-                    addNewComment(post.id, e.currentTarget.value);
-                    e.currentTarget.value = "";
+                    addNewComment(post.id, idx);
                   }
                 }}
                 placeholder="Add a comment..."
@@ -244,7 +254,7 @@ export const Posts = () => {
               />
               <InputRightElement my="1" mr="3">
                 <Button
-                  onClick={() => addNewComment(post.id, "hello!")}
+                  onClick={() => addNewComment(post.id, idx)}
                   variant="ghost"
                   colorScheme="black"
                   color="blue.400"
