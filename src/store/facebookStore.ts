@@ -4,11 +4,11 @@ import { devtools } from "zustand/middleware";
 
 import {
   FacebookComment,
-  fetchCurrentUser,
+  fetchUser,
   fetchFacebookMessages,
   fetchFacebookNotifications,
   fetchFacebookPosts,
-  fetchOnlineUsers,
+  fetchUsers,
   FacebookMessage,
   FacebookNotification,
   FacebookPost,
@@ -32,9 +32,9 @@ interface FacebookState {
 
 export const useFacebookStore = create<FacebookState>()(
   devtools((set) => ({
-    currentUser: fetchCurrentUser(),
+    currentUser: fetchUser(),
     posts: fetchFacebookPosts(),
-    onlineUsers: fetchOnlineUsers(),
+    onlineUsers: fetchUsers(),
     messages: fetchFacebookMessages(),
     notifications: fetchFacebookNotifications(),
 

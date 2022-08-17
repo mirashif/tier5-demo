@@ -28,7 +28,7 @@ export const AddPost = () => {
     >
       <VStack align="stretch" spacing={4}>
         <HStack align="center" h="40px">
-          <Avatar src={currentUser?.avatar} boxSize="40px" />
+          <Avatar src={currentUser?.avatarUrl} boxSize="40px" />
           <Input
             ref={postInputRef}
             variant="filled"

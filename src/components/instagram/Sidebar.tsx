@@ -1,80 +1,85 @@
 import {
   Avatar,
-  AvatarBadge,
   Box,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerOverlay,
-  Heading,
+  Button,
+  Flex,
   HStack,
   List,
   ListItem,
   Text,
 } from "@chakra-ui/react";
 
-import { HEADER_HEIGHT } from "./Header";
+import { useInstagramStore } from "~/store";
 
-import { useFacebookStore } from "~/store";
-
-export type SidebarVariant = "sidebar" | "drawer";
-
-interface Props {
-  onClose: () => void;
-  isOpen: boolean;
-  variant: SidebarVariant;
-}
-
-export const Sidebar = ({ variant, isOpen, onClose }: Props) => {
-  return variant === "sidebar" ? (
+export const Sidebar = () => {
+  const currentUser = useInstagramStore((state) => state.currentUser);
+  const followSuggestions = useInstagramStore(
+    (state) => state.followSuggestions
+  );
+  return (
     <Box
-      position="sticky"
-      top={`${HEADER_HEIGHT}px`}
-      height="100vh"
-      maxH={`calc(100vh - ${HEADER_HEIGHT}px)`}
-      w="sm"
-      minW="xs"
+      as="aside"
+      px="4"
+      w="full"
+      maxW="350px"
       overflowY="auto"
       overflowX="hidden"
     >
-      <SidebarContent />
-    </Box>
-  ) : (
-    <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-      <DrawerOverlay>
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerBody>
-            <SidebarContent />
-          </DrawerBody>
-        </DrawerContent>
-      </DrawerOverlay>
-    </Drawer>
-  );
-};
+      <Flex align="center" gap="4" px="4" mt="4" mb="10px">
+        <Avatar boxSize="56px" src={currentUser?.avatarUrl} />
+        <Flex direction="column" flex="1">
+          <Text fontSize="14px" fontWeight="semibold">
+            {currentUser?.username}
+          </Text>
+          <Text fontSize="14px" fontWeight="medium" color="gray.500">
+            {currentUser?.name}
+          </Text>
+        </Flex>
+      </Flex>
 
-const SidebarContent = () => {
-  const onlineUsers = useFacebookStore((state) => state.onlineUsers);
-  return (
-    <Box as="aside" w="full" maxW="sm">
       <List my="4">
-        <Heading size="md" color="blackAlpha.700" p="4">
-          Online Users
-        </Heading>
-        {onlineUsers.map((user) => (
-          <ListItem key={user.id} w="full" h="52px" px="4">
+        <Flex justify="space-between" py="1">
+          <Text fontSize="14px" fontWeight="bold" color="blackAlpha.600">
+            Suggestions for you
+          </Text>
+          <Button
+            variant="link"
+            colorScheme="black"
+            fontSize="12px"
+            fontWeight="bold"
+            p="0"
+            m="0"
+          >
+            See All
+          </Button>
+        </Flex>
+
+        {followSuggestions.map((user) => (
+          <ListItem key={user.id} w="full" h="48px" py="2">
             <HStack spacing="3">
-              <Avatar src={user.avatar} boxSize="36px">
-                <AvatarBadge
-                  bg="green.500"
-                  borderWidth="2px"
-                  boxSize="12px"
-                  right="2px"
-                  bottom="2px"
-                />
-              </Avatar>
-              <Text fontWeight="semibold">{user.name}</Text>
+              <Avatar src={user.avatarUrl} boxSize="32px" />
+              <Flex grow="1" direction="column" justify="space-between" py="1">
+                <Text fontSize="14px" fontWeight="bold">
+                  {user.username}
+                </Text>
+                <Text
+                  fontSize="12px"
+                  fontWeight="medium"
+                  color="blackAlpha.600"
+                >
+                  Follows you
+                </Text>
+              </Flex>
+              <Button
+                variant="link"
+                colorScheme="blue"
+                fontSize="12px"
+                fontWeight="bold"
+                p="0"
+                m="0"
+              >
+                Follow
+              </Button>
             </HStack>
           </ListItem>
         ))}

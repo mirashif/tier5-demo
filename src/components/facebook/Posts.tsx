@@ -160,7 +160,7 @@ export const Posts = () => {
           {/* add a comment */}
           <VStack align="stretch" spacing={3} my={3}>
             <HStack align="center">
-              <Avatar src={currentUser.avatar} boxSize="40px" />
+              <Avatar src={currentUser.avatarUrl} boxSize="40px" />
               <Input
                 id={`comment-${post.id}`}
                 onKeyDown={(e) => {

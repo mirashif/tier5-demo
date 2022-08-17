@@ -25,16 +25,14 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiOutlinePlusSquare } from "react-icons/ai";
 
 import InstagramSvg from "!/instagram.svg";
-import { useFacebookStore } from "~/store";
+import { useInstagramStore } from "~/store";
 
 export const HEADER_HEIGHT = 60;
 const HEADER_MAX_WIDTH = 975;
 
 export function Header() {
   const navigate = useNavigate();
-
-  const currentUser = useFacebookStore((state) => state.currentUser);
-
+  const currentUser = useInstagramStore((state) => state.currentUser);
   return (
     <Box
       as="header"
@@ -130,7 +128,7 @@ export function Header() {
                 <Avatar
                   boxSize="24px"
                   name={currentUser?.name}
-                  src={currentUser?.avatar}
+                  src={currentUser?.avatarUrl}
                 />
               </MenuButton>
               <MenuList w="230px" py="1" shadow="md" borderRadius="base">

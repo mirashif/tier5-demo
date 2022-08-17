@@ -29,7 +29,7 @@ import { IoLogOut, IoNotifications } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 
-import { useInstagramStore } from "~/store";
+import { useFacebookStore } from "~/store";
 
 export const HEADER_HEIGHT = 56;
 
@@ -43,9 +43,9 @@ interface Props {
 export function Header({ showMenuButton, onShowSidebar }: Props) {
   const navigate = useNavigate();
 
-  const currentUser = useInstagramStore((state) => state.currentUser);
-  const messages = useInstagramStore((state) => state.messages);
-  const notifications = useInstagramStore((state) => state.notifications);
+  const currentUser = useFacebookStore((state) => state.currentUser);
+  const messages = useFacebookStore((state) => state.messages);
+  const notifications = useFacebookStore((state) => state.notifications);
 
   return (
     <Box
@@ -189,7 +189,7 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
               <Avatar
                 boxSize="40px"
                 name={currentUser?.name}
-                src={currentUser?.avatar}
+                src={currentUser?.avatarUrl}
               />
             </MenuButton>
             <MenuList p="2" shadow="dark-lg">
@@ -198,7 +198,7 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
                   <Avatar
                     boxSize="40px"
                     name={currentUser?.name}
-                    src={currentUser?.avatar}
+                    src={currentUser?.avatarUrl}
                   />
                   <Text fontWeight="semibold">{currentUser?.name}</Text>
                 </MenuItem>

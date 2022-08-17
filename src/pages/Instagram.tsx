@@ -1,18 +1,19 @@
 import { Container, Flex } from "@chakra-ui/react";
 
-import { Header, Posts, Stories } from "~/components/instagram";
+import { Header, Posts, Sidebar, Stories } from "~/components/instagram";
 
 export function Instagram() {
   return (
     <Flex direction="column" align="center">
       <Header />
       <Flex
-        gap={4}
+        gap="4"
         px="4"
+        my="7"
         w="full"
         maxW="5xl"
         align="start"
-        justify={{ base: "center", lg: "space-between" }}
+        justify="center"
       >
         <Container
           as="main"
@@ -24,6 +25,7 @@ export function Instagram() {
           <Stories />
           <Posts />
         </Container>
+        <Sidebar />
       </Flex>
     </Flex>
   );

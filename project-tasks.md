@@ -65,11 +65,11 @@ You can follow the below JSON structure for the API response and modify it accor
 Using React create a dummy Instagram home page.
 Functionalities required:
 - [x] Listing of posts
-- [ ] Actions on each post  
-  - [ ] like,  
-  - [ ] comment,  
-  - [ ] share  
-  - [ ] save  
+- [x] Actions on each post  
+  - [x] like,  
+  - [x] comment,  
+  - [x] share  
+  - [x] save  
 - [x] Each post should have comments
 - [x] Stories list
 - [x] Current user name and profile icon

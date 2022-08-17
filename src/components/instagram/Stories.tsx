@@ -9,7 +9,6 @@ export const Stories = () => {
       as="section"
       aria-label="Stories"
       p="4"
-      mt="5"
       gap="4"
       border="1px"
       borderColor="gray.300"

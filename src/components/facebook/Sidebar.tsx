@@ -65,7 +65,7 @@ const SidebarContent = () => {
         {onlineUsers.map((user) => (
           <ListItem key={user.id} w="full" h="52px" px="4">
             <HStack spacing="3">
-              <Avatar src={user.avatar} boxSize="36px">
+              <Avatar src={user.avatarUrl} boxSize="36px">
                 <AvatarBadge
                   bg="green.500"
                   borderWidth="2px"

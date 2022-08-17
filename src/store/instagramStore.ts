@@ -3,19 +3,21 @@ import create from "zustand";
 import { devtools } from "zustand/middleware";
 
 import {
-  fetchCurrentUser,
+  fetchUser,
   fetchInstagramPosts,
   fetchInstagramStories,
   InstagramComment,
   InstagramPost,
   InstagramStory,
   User,
+  fetchUsers,
 } from "~/services";
 
 interface InstagramState {
   currentUser: User | null;
   stories: InstagramStory[] | [];
   posts: InstagramPost[] | [];
+  followSuggestions: User[] | [];
 
   toggleLike: (postId: InstagramPost["id"]) => void;
   toggleSave: (postId: InstagramPost["id"]) => void;
@@ -27,9 +29,10 @@ interface InstagramState {
 
 export const useInstagramStore = create<InstagramState>()(
   devtools((set) => ({
-    currentUser: fetchCurrentUser(),
+    currentUser: fetchUser(),
     stories: fetchInstagramStories(),
     posts: fetchInstagramPosts(),
+    followSuggestions: fetchUsers(),
 
     toggleLike: (postId: InstagramPost["id"]) => {
       set((state) => ({
