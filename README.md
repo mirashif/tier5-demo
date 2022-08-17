@@ -6,7 +6,7 @@
 <img width="1680" alt="image" src="https://user-images.githubusercontent.com/34467318/185023620-13102fd2-c659-45ee-9694-2de2fefcab41.png">
 
 ## Summary
-This is React demo project for Tier5 which includes Facebook and Instagram home page clone following the given INSTRUCTION.md. You can view the project live on [mirashif.com/tier5](https://mirashif.com/tier5) or, run locally.  
+This is a React demo project for Tier5 which includes Facebook and Instagram home page clone following the given INSTRUCTION.md. You can view the project live on [mirashif.com/tier5](https://mirashif.com/tier5) or, run locally on your machine.  
 I have scaffold the project with Vite React Typescript boilerplate. I used React Router for navigation, ChakraUI for basic UI building blocks, Zustand for state management, and Fakerjs for generating dummy data.  
 
 ## Instruction for running it locally
