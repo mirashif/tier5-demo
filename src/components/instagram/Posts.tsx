@@ -109,7 +109,7 @@ export const Posts = () => {
         >
           {/* post head */}
           <HStack spacing="3" py="2" px="3">
-            <Avatar src={post.user.avatar} boxSize="32px" />
+            <Avatar src={post.user.avatarUrl} boxSize="32px" />
             <Text fontSize="14px" fontWeight="semibold">
               {post.user.name}
             </Text>

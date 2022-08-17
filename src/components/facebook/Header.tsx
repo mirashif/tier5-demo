@@ -115,7 +115,7 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
                 <Flex direction="column">
                   {messages.map((message) => (
                     <Flex key={message.id} gap="2" p="2" borderRadius="lg">
-                      <Avatar src={message.user.avatar} />
+                      <Avatar src={message.user.avatarUrl} />
                       <Flex direction="column">
                         <Text noOfLines={1} fontWeight="semibold">
                           {message.user.name}
@@ -164,7 +164,7 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
                 <Flex direction="column">
                   {notifications.map((notification) => (
                     <Flex key={notification.id} gap="2" p="2" borderRadius="lg">
-                      <Avatar src={notification.user.avatar} />
+                      <Avatar src={notification.user.avatarUrl} />
                       <Flex direction="column">
                         <Text noOfLines={3}>
                           <Text as="span" fontWeight="semibold">

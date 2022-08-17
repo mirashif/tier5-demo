@@ -17,7 +17,7 @@ export const fetchFacebookMessages = () => {
         id: faker.datatype.uuid(),
         username: faker.internet.userName(),
         name: faker.name.fullName(),
-        avatar: faker.internet.avatar(),
+        avatarUrl: faker.internet.avatar(),
       },
       postedOn: faker.datatype.number({ max: 59, min: 1 }),
       text: faker.lorem.paragraphs(),

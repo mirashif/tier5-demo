@@ -17,7 +17,7 @@ export function fetchInstagramStories() {
         id: faker.datatype.uuid(),
         username: faker.internet.userName(),
         name: faker.name.fullName(),
-        avatar: faker.internet.avatar(),
+        avatarUrl: faker.internet.avatar(),
       },
       imageUrl: faker.image.imageUrl(),
     };

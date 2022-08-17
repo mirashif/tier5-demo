@@ -25,7 +25,7 @@ export function fetchFacebookPosts(limit?: number) {
         id: faker.datatype.uuid(),
         username: faker.internet.userName(),
         name: faker.name.fullName(),
-        avatar: faker.internet.avatar(),
+        avatarUrl: faker.internet.avatar(),
       },
       postedOn: faker.date.past(),
       text: faker.lorem.paragraphs(),
@@ -47,7 +47,7 @@ export function fetchFacebookPosts(limit?: number) {
             id: faker.datatype.uuid(),
             username: faker.internet.userName(),
             name: faker.name.fullName(),
-            avatar: faker.internet.avatar(),
+            avatarUrl: faker.internet.avatar(),
           },
         };
       }),
@@ -85,7 +85,7 @@ export function fetchInstagramPosts(limit?: number) {
             id: faker.datatype.uuid(),
             username: faker.internet.userName(),
             name: faker.name.fullName(),
-            avatar: faker.internet.avatar(),
+            avatarUrl: faker.internet.avatar(),
           },
         };
       }),

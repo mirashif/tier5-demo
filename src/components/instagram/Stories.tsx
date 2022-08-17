@@ -29,7 +29,7 @@ export const Stories = () => {
             bgGradient="linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)"
           >
             <Circle p="2px" bg="white">
-              <Image src={user.avatar} boxSize="56px" borderRadius="full" />
+              <Image src={user.avatarUrl} boxSize="56px" borderRadius="full" />
             </Circle>
           </Circle>
           <Text fontSize="12px" maxW="66px" noOfLines={1}>
