@@ -27,7 +27,7 @@ export const Sidebar = () => {
         overflowY="auto"
         overflowX="hidden"
       >
-        <Flex align="center" gap="4" px="4" mt="4" mb="10px">
+        <Flex align="center" gap="4" mt="4" mb="10px">
           <Avatar boxSize="56px" src={currentUser?.avatarUrl} />
           <Flex direction="column" flex="1">
             <Text fontSize="14px" fontWeight="semibold">
