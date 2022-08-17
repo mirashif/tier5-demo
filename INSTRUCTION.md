@@ -64,23 +64,23 @@ You can follow the below JSON structure for the API response and modify it accor
 
 Using React create a dummy Instagram home page.
 Functionalities required:
-- [ ] Listing of posts
-- [ ] Actions on each post  
-  - [ ] like,  
-  - [ ] comment,  
-  - [ ] share  
-  - [ ] save  
-- [ ] Each post should have comments
-- [ ] Stories list
-- [ ] Current user name and profile icon
-- [ ] Header with 
-  - [ ] search, 
-  - [ ] profile, 
-  - [ ] messages, 
-  - [ ] notifications
-- [ ] Implement a dummy API call that will return the list of posts that can be used to render posts in the UI.  
-- [ ] Responsive design
+- [x] Listing of posts
+- [x] Actions on each post  
+  - [x] like,  
+  - [x] comment,  
+  - [x] share  
+  - [x] save  
+- [x] Each post should have comments
+- [x] Stories list
+- [x] Current user name and profile icon
+- [x] Header with 
+  - [x] search, 
+  - [x] messages, 
+  - [x] profile, and more.
+- [x] Implement a dummy API call that will return the list of posts that can be used to render posts in the UI.  
+- [x] Responsive design
   `
+
 You can use the below JSON as a reference for the API response, add more fields to the JSON if required.
 
 ```json

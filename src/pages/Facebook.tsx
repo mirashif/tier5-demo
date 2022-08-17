@@ -8,7 +8,7 @@ import {
   ShowMenu,
   Sidebar,
   SidebarVariant,
-} from "~/components";
+} from "~/components/facebook";
 
 type Breakpoint = { sidebar: SidebarVariant; showMenu: ShowMenu };
 
@@ -40,7 +40,6 @@ export function Facebook() {
         maxW="5xl"
         align="start"
         justify={{ base: "center", lg: "space-between" }}
-        zIndex="base"
       >
         <Container
           as="main"

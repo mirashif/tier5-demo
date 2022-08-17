@@ -189,7 +189,7 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
               <Avatar
                 boxSize="40px"
                 name={currentUser?.name}
-                src={currentUser?.avatar}
+                src={currentUser?.avatarUrl}
               />
             </MenuButton>
             <MenuList p="2" shadow="dark-lg">
@@ -198,7 +198,7 @@ export function Header({ showMenuButton, onShowSidebar }: Props) {
                   <Avatar
                     boxSize="40px"
                     name={currentUser?.name}
-                    src={currentUser?.avatar}
+                    src={currentUser?.avatarUrl}
                   />
                   <Text fontWeight="semibold">{currentUser?.name}</Text>
                 </MenuItem>

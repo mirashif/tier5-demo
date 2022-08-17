@@ -1,13 +1,13 @@
 import { faker } from "@faker-js/faker";
 
-export type FacebookMessage = ReturnType<typeof fetchFacebookMessages>[0];
+export type InstagramStory = ReturnType<typeof fetchInstagramStories>[0];
 
-export const fetchFacebookMessages = () => {
-  const messages = [
+export function fetchInstagramStories() {
+  return [
     ...Array(
       faker.datatype.number({
-        min: 15,
-        max: 20,
+        min: 10,
+        max: 30,
       })
     ),
   ].map((_) => {
@@ -19,10 +19,7 @@ export const fetchFacebookMessages = () => {
         name: faker.name.fullName(),
         avatar: faker.internet.avatar(),
       },
-      postedOn: faker.datatype.number({ max: 59, min: 1 }),
-      text: faker.lorem.paragraphs(),
+      imageUrl: faker.image.imageUrl(),
     };
   });
-
-  return messages.sort((a, b) => a.postedOn - b.postedOn);
-};
+}

@@ -1,7 +1,24 @@
 import { faker } from "@faker-js/faker";
 
+export type FacebookPost = ReturnType<typeof fetchFacebookPosts>[0];
+export type FacebookComment = ReturnType<
+  typeof fetchFacebookPosts
+>[0]["comments"][0];
+export type InstagramPost = ReturnType<typeof fetchInstagramPosts>[0];
+export type InstagramComment = ReturnType<
+  typeof fetchInstagramPosts
+>[0]["comments"][0];
+
 export function fetchFacebookPosts(limit?: number) {
-  const posts: Post[] = [...Array(limit || 25)].map((_) => {
+  const posts = [
+    ...Array(
+      limit ||
+        faker.datatype.number({
+          min: 15,
+          max: 20,
+        })
+    ),
+  ].map((_) => {
     return {
       id: faker.datatype.uuid(),
       user: {
@@ -14,7 +31,14 @@ export function fetchFacebookPosts(limit?: number) {
       text: faker.lorem.paragraphs(),
       likes: faker.datatype.number(100),
       liked: faker.datatype.boolean(),
-      comments: [...Array(Math.floor(Math.random() * 10))].map((__) => {
+      comments: [
+        ...Array(
+          faker.datatype.number({
+            min: 1,
+            max: 10,
+          })
+        ),
+      ].map((__) => {
         return {
           id: faker.datatype.uuid(),
           text: faker.lorem.lines(),
@@ -33,26 +57,40 @@ export function fetchFacebookPosts(limit?: number) {
   return posts;
 }
 
-export interface User {
-  id: string;
-  username: string;
-  name: string;
-  avatar: string;
-}
+export function fetchInstagramPosts(limit?: number) {
+  const posts = fetchFacebookPosts(limit).map((post) => {
+    return {
+      ...post,
+      imageUrl: faker.image.imageUrl(470, 585, "random", true),
+      saved: faker.datatype.boolean(),
+      text: faker.lorem.lines(),
+      comments: [
+        ...Array(
+          faker.datatype.number({
+            min: 1,
+            max: 5,
+          })
+        ),
+      ].map((__) => {
+        return {
+          id: faker.datatype.uuid(),
+          text: faker.lorem.lines(
+            faker.datatype.number({
+              min: 1,
+              max: 3,
+            })
+          ),
+          createdAt: faker.date.past(),
+          user: {
+            id: faker.datatype.uuid(),
+            username: faker.internet.userName(),
+            name: faker.name.fullName(),
+            avatar: faker.internet.avatar(),
+          },
+        };
+      }),
+    };
+  });
 
-export interface Comment {
-  id: string;
-  text: string;
-  createdAt: Date;
-  user: User;
-}
-
-export interface Post {
-  id: string;
-  user: User;
-  postedOn: Date;
-  text: string;
-  likes: number;
-  liked: boolean;
-  comments: Comment[] | [];
+  return posts;
 }
